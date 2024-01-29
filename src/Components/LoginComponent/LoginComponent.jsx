@@ -12,7 +12,7 @@ export default function LoginComponent() {
         console.log("email -->", email)
         console.log("password -->", password)
 
-        fetch("http://localhost:5000/login-user", {
+        fetch("https://government-backend-production.up.railway.app/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {

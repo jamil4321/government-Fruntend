@@ -73,7 +73,7 @@ export default function DateAprove() {
     
     if (logoutEmail == "user@gmail.com") {
       var location = "Karachi camp office"
-      fetch("http://localhost:5000/upload-image", {
+      fetch("https://government-backend-production.up.railway.app/upload-image", {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -94,7 +94,7 @@ export default function DateAprove() {
       })
       }else if (logoutEmail == "user2@gmail.com") {
         var location = "hyderabad head office"
-        fetch("http://localhost:5000/upload-image", {
+        fetch("https://government-backend-production.up.railway.app/upload-image", {
           method: "POST",
           crossDomain: true,
           headers: {
@@ -115,7 +115,7 @@ export default function DateAprove() {
         })
       }else if (logoutEmail == "admin@gmail.com") {
         var location = "Admin"
-        fetch("http://localhost:5000/upload-image", {
+        fetch("https://government-backend-production.up.railway.app/upload-image", {
           method: "POST",
           crossDomain: true,
           headers: {
@@ -152,7 +152,7 @@ export default function DateAprove() {
     console.log(QrGet);
 
     // Construct the URL for the specific QR code route
-    const specificUrl = `http://localhost:5000/Qrdetail/${uniqueId}`;
+    const specificUrl = `https://government-backend-production.up.railway.app/Qrdetail/${uniqueId}`;
 
     Swal.fire({
       title: "FileName: " + name,
