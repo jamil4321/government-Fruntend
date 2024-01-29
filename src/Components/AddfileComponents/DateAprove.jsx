@@ -1,7 +1,6 @@
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
 let uniqueId;
@@ -71,8 +70,8 @@ export default function DateAprove() {
 
     localStorage.setItem("QrDetailName", JSON.stringify(name));
     
-    if (logoutEmail == "user@gmail.com") {
-      var location = "Karachi camp office"
+    if (logoutEmail === "user@gmail.com") {
+      let location = "Karachi camp office"
       fetch("https://government-backend-production.up.railway.app/upload-image", {
         method: "POST",
         crossDomain: true,
@@ -92,8 +91,8 @@ export default function DateAprove() {
           location
         }),
       })
-      }else if (logoutEmail == "user2@gmail.com") {
-        var location = "hyderabad head office"
+      }else if (logoutEmail === "user2@gmail.com") {
+        let location = "hyderabad head office"
         fetch("https://government-backend-production.up.railway.app/upload-image", {
           method: "POST",
           crossDomain: true,
@@ -113,8 +112,8 @@ export default function DateAprove() {
             location
           }),
         })
-      }else if (logoutEmail == "admin@gmail.com") {
-        var location = "Admin"
+      }else if (logoutEmail === "admin@gmail.com") {
+        let location = "Admin"
         fetch("https://government-backend-production.up.railway.app/upload-image", {
           method: "POST",
           crossDomain: true,
@@ -152,7 +151,7 @@ export default function DateAprove() {
     console.log(QrGet);
 
     // Construct the URL for the specific QR code route
-    const specificUrl = `https://government-backend-production.up.railway.app/Qrdetail/${uniqueId}`;
+    // const specificUrl = `https://government-backend-production.up.railway.app/Qrdetail/${uniqueId}`;
 
     Swal.fire({
       title: "FileName: " + name,
@@ -172,11 +171,11 @@ export default function DateAprove() {
 
 
   console.log("uniqueid", uniqueId)
-  function generateUniqueId() {
-    // You can use a library like uuid to generate a unique identifier
-    // For simplicity, let's use a simple timestamp-based identifier-
-    return Date.now().toString();
-  }
+  // function generateUniqueId() {
+  //   // You can use a library like uuid to generate a unique identifier
+  //   // For simplicity, let's use a simple timestamp-based identifier-
+  //   return Date.now().toString();
+  // }
 
 
 

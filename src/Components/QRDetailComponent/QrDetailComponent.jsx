@@ -38,6 +38,7 @@ export default function QrDetailComponent() {
 
   const handleLogin = (e) => {
     e.preventDefault()
+    /* eslint-disable array-callback-return */
     allImage.map((item, index) => {
 
       // const currentURL = window.location.href;
@@ -48,7 +49,7 @@ export default function QrDetailComponent() {
       // console.log(currentURL, 'currentUrl');
       // console.log(urlid);
 
-      if (item.Qrcode === url && item.password == password) {
+      if (item.Qrcode === url && item.password === password) {
         localStorage.setItem("name", JSON.stringify(item.name))
         localStorage.setItem("fileid", JSON.stringify(item.fileid))
         localStorage.setItem("select", JSON.stringify(item.select))
@@ -80,7 +81,7 @@ export default function QrDetailComponent() {
 
   }
 
-  const autoName = JSON.parse(localStorage.getItem('QrDetailName'))
+  // const autoName = JSON.parse(localStorage.getItem('QrDetailName'))
 
 
   return (

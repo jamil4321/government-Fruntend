@@ -1,6 +1,5 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
-import Swal from 'sweetalert2';
 import {
   Card,
   CardHeader,
@@ -13,7 +12,7 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import {List, ListItem, ListItemPrefix } from "@material-tailwind/react";
-import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
+import { PowerIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios
@@ -102,6 +101,7 @@ if (logout && logout.length > 0) {
         <table className="mt-4 w-full min-w-max table-auto text-left">
         <thead>
             <tr>
+              
               {TABLE_HEAD.map((head) => (
                 <th key={head} className=" border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                   <Typography variant="small" color="blue-gray" className="font-normal leading-none opacity-70">
@@ -112,7 +112,9 @@ if (logout && logout.length > 0) {
             </tr>
           </thead>
           <tbody>
-          {allImage.map((data, index) => {
+          {
+            /* eslint-disable array-callback-return */
+          allImage.map((data, index) => {
               const isLast = index === allImage.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 

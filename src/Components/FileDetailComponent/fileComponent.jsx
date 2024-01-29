@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 export default function FileDetailComponent() {
   const [allImage, setAllImage] = useState([]);
-  const [location, setLocation] = useState('');
+  // const [location, setLocation] = useState('');
   
 
   const localStorageName = JSON.parse(localStorage.getItem("name"))
