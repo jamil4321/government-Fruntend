@@ -13,7 +13,7 @@ import {
 } from "@material-tailwind/react";
 import {List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { PowerIcon } from "@heroicons/react/24/solid";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios
 import '../../App.css'
@@ -26,7 +26,7 @@ let datalength;
 export default function TableWeb() {
   const [allImage, setAllImage] = useState([]);
   const [search, setSearch] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     getImage()

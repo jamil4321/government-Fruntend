@@ -10,7 +10,7 @@ export default function DateAprove() {
   const [name, setName] = useState('')
   const [select, setSelect] = useState('')
   const [password, setPassword] = useState('')
-  const [Qrcode, setQrCode] = useState('')
+  const [_, setQrCode] = useState('')
 
   const fileid = '002345';
 
