@@ -10,7 +10,9 @@ export default function DateAprove() {
   const [name, setName] = useState('')
   const [select, setSelect] = useState('')
   const [password, setPassword] = useState('')
-  const [_, setQrCode] = useState('')
+  /* eslint-disable no-unused-vars */
+  const [Qrcode, setQrCode] = useState('')
+  /* eslint-enable no-unused-vars */
 
   const fileid = '002345';
 
