@@ -61,7 +61,7 @@ export default function DateAprove() {
       
       
       // Construct the QR code URL with the unique identifier
-      const QrNavigate = `http://localhost:3000/Qrdetail/id/id:${uniqueId}`;
+      const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
       
       const response = await QRCode.toDataURL(QrNavigate);
       setQrCode(response);
@@ -183,7 +183,7 @@ export default function DateAprove() {
 
 
   return (
-    <form action="localhost:5000/upload-image" method="POST" enctype="multipart/form-data">
+    <form action="government-backend-production.up.railway.app/upload-image" method="POST" enctype="multipart/form-data">
     <div className="container mx-auto p-4 lg:w-3/4 xl:w-2/3">
       <div className="flex flex-col lg:flex-row justify-center lg:justify-between">
         <div className="mb-4 lg:mr-4">
