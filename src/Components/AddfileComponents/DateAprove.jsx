@@ -133,7 +133,7 @@ export default function DateAprove() {
 
 
   return (
-    <form action="localhost:5000/upload-image" method="POST" enctype="multipart/form-data">
+    <form action="https://government-backend-production.up.railway.app/upload-image" method="POST" enctype="multipart/form-data">
     <div className="container mx-auto p-4 lg:w-3/4 xl:w-2/3">
       <div className="flex flex-col lg:flex-row justify-center lg:justify-between">
         <div className="mb-4 lg:mr-4">
