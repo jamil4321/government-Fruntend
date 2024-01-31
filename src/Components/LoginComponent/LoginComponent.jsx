@@ -32,7 +32,7 @@ export default function LoginComponent() {
                 showConfirmButton: false
             });
         }
-        fetch("http://localhost:5000/login-user", {
+        fetch("https://government-backend-production.up.railway.app/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {
