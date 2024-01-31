@@ -10,7 +10,7 @@ function FileDetail() {
             <Webnavbar />
             <div className='flex flex-wrap justify-between' style={{ width: '100%' }} >
                 <div id="sidebarVanish" style={{ backgroundColor: 'white', marginTop: '155px', width: '25%' }} >
-                    <Websidebar Sout="/" Dboard="/Dashboard" />
+                    <Websidebar Afile="/" Dboard="/Dashboard" />
                 </div>
                 <div className='cardresponsiveback  flex justify-center ' style={{ paddingTop: '130px', width: '75%' }} >
 
