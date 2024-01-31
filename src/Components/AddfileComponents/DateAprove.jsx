@@ -126,8 +126,10 @@ export default function DateAprove() {
       cancelButtonText: '<a style="color: white; text-decoration: none;" href="/Dashboard">Ok</a>',
       customClass: {
         popup: 'responsive-sweetalert'
-      }
+      },
+      footer: '<span style="color: red;">Note: There is no other option to download QR code later</span>'
     });
+
   }
 
 
