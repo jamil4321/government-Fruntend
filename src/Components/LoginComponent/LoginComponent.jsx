@@ -11,27 +11,27 @@ export default function LoginComponent() {
     
     const handleLogin = (e) => {
         e.preventDefault();
-        console.log("email -->", email);
-        console.log("password -->", password);
-        if(email == "admin@gmail.com" || email == "user@gmail.com" || email == "user2@gmail.com"){
-            console.log("User Login success");
-        }else{
-            Swal.fire({
-                title: "Invalid Email",
-                icon: "error",
-                showConfirmButton: false
-            });
-        } 
-        if(password == "admin123" || password == "user123" || password == "user2123"){
-            console.log("User Login success");
-        }
-        else{
-            Swal.fire({
-                title: "Invalid Password",
-                icon: "error",
-                showConfirmButton: false
-            });
-        }
+        // console.log("email -->", email);
+        // console.log("password -->", password);
+        // if(email == "admin@gmail.com" || email == "user@gmail.com" || email == "user2@gmail.com"){
+        //     console.log("User Login success");
+        // }else{
+        //     Swal.fire({
+        //         title: "Invalid Email",
+        //         icon: "error",
+        //         showConfirmButton: false
+        //     });
+        // } 
+        // if(password == "admin123" || password == "user123" || password == "user2123"){
+        //     console.log("User Login success");
+        // }
+        // else{
+        //     Swal.fire({
+        //         title: "Invalid Password",
+        //         icon: "error",
+        //         showConfirmButton: false
+        //     });
+        // }
         fetch("https://government-backend-production.up.railway.app/login-user", {
             method: "POST",
             crossDomain: true,
