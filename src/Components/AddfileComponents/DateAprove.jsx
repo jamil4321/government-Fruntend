@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
-import axios from "axios";
+// import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
-let uniqueId;
+// let uniqueId;
 export default function DateAprove() {
   const [image, setImage] = useState("");
   const [name, setName] = useState('');
