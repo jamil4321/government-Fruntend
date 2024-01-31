@@ -117,8 +117,7 @@ export default function DateAprove() {
     console.log(QrGet);
 
     Swal.fire({
-      title: "FileName: " + name,
-      text: "You clicked the button!",
+      title: "File Added Seccessfully",
       html: `<div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><img src=${QrGet} alt="no image" style="max-width: 100%; height: auto;" /></div>`,
       showCancelButton: true,
       confirmButtonColor: 'green',
