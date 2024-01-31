@@ -1,34 +1,29 @@
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
 let uniqueId;
 export default function DateAprove() {
-
   const [image, setImage] = useState("");
-  const [name, setName] = useState('')
-  const [select, setSelect] = useState('')
-  const [password, setPassword] = useState('')
-  /* eslint-disable no-unused-vars */
-  const [Qrcode, setQrCode] = useState('')
-  /* eslint-enable no-unused-vars */
-
-  const fileid = '002345';
+  const [name, setName] = useState('');
+  const [select, setSelect] = useState('');
+  const [password, setPassword] = useState('');
+  const [Qrcode, setQrCode] = useState('');
+  let uniqueId;
 
   const covertToBase64 = (e) => {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-        console.log(reader.result); // base64-encoded string
-        setImage(reader.result);
+      console.log(reader.result);
+      setImage(reader.result);
     };
     reader.onerror = (error) => {
-        console.log("Error: ", error);
+      console.log("Error: ", error);
     };
-};
-
-  
+  };
 
   const formatDate = () => {
     const options = {
@@ -39,30 +34,29 @@ export default function DateAprove() {
       minute: 'numeric',
       hour12: true,
     };
-    
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date());
 
+    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date());
     return formattedDate;
   };
-  
-  const date = formatDate()
-  
+
+  const date = formatDate();
+
   useEffect(() => {
     // getImage()
-  }, [])
+  }, []);
+
   var logoutEmail = JSON.parse(localStorage.getItem('email'));
   console.log("logoutEmail", logoutEmail);
-  
-  async function uploadImage() {
+
+  async function uploadImage(e) {
+    e.preventDefault();
+
     try {
-      // Generate a unique identifier (you can use a library like uuid)
       uniqueId = Math.round(Math.random() * 10000000000000);
-      console.log(uniqueId, "uniqueid")
-      
-      
-      // Construct the QR code URL with the unique identifier
+      console.log(uniqueId, "uniqueid");
+
       const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
-      
+
       const response = await QRCode.toDataURL(QrNavigate);
       setQrCode(response);
       localStorage.setItem("QrCode", response);
@@ -71,10 +65,22 @@ export default function DateAprove() {
     }
 
     localStorage.setItem("QrDetailName", JSON.stringify(name));
-    
+
+    var location = '';
+
     if (logoutEmail === "user@gmail.com") {
-      let location = "Karachi camp office"
-      fetch("https://government-backend-production.up.railway.app/upload-image", {
+      location = "Karachi camp office";
+    } else if (logoutEmail === "user2@gmail.com") {
+      location = "hyderabad head office";
+    } else if (logoutEmail === "admin@gmail.com") {
+      location = "Admin";
+    } else {
+      console.log("Invalid email");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://government-backend-production.up.railway.app/upload-image", {
         method: "POST",
         crossDomain: true,
         headers: {
@@ -84,76 +90,30 @@ export default function DateAprove() {
         },
         body: JSON.stringify({
           base64: image,
-          name, 
+          name,
           select,
           password,
-          fileid,
+          fileid: '002345',
           date,
           uniqueId,
-          location
+          location,
         }),
-      })
-      }else if (logoutEmail === "user2@gmail.com") {
-        let location = "hyderabad head office"
-        fetch("https://government-backend-production.up.railway.app/upload-image", {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            base64: image,
-            name, 
-            select,
-            password,
-            fileid,
-            date,
-            uniqueId,
-            location
-          }),
-        })
-      }else if (logoutEmail === "admin@gmail.com") {
-        let location = "Admin"
-        fetch("https://government-backend-production.up.railway.app/upload-image", {
-          method: "POST",
-          crossDomain: true,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Access-Control-Allow-Origin": "*",
-          },
-          body: JSON.stringify({
-            base64: image,
-            name, 
-            select,
-            password,
-            fileid,
-            date,
-            uniqueId,
-            location
-          }),
-        })
-      }
-      else{
-        console.log("data is not adding")
-      }
-      // .then((res) => res.json())
-      // .then((dataa) => {
-      //   console.log(dataa);
-      //   // setTimeout(() => {
-      //   //   window.location = "/Dashboard"
-      //   // }, 3000);
-      // });
+      });
 
-    console.log("fileid", fileid);
+      // Check if the request was successful
+      if (!response.ok) {
+        console.error("Failed to upload image");
+        return;
+      }
+
+      // ... rest of your code for handling the response
+
+    } catch (error) {
+      console.error("Error in fetch:", error);
+    }
+
     const QrGet = localStorage.getItem("QrCode");
-
     console.log(QrGet);
-
-    // Construct the URL for the specific QR code route
-    // const specificUrl = `https://government-backend-production.up.railway.app/Qrdetail/${uniqueId}`;
 
     Swal.fire({
       title: "FileName: " + name,
@@ -167,23 +127,13 @@ export default function DateAprove() {
         popup: 'responsive-sweetalert'
       }
     });
-    
-    
   }
-
-
-  console.log("uniqueid", uniqueId)
-  // function generateUniqueId() {
-  //   // You can use a library like uuid to generate a unique identifier
-  //   // For simplicity, let's use a simple timestamp-based identifier-
-  //   return Date.now().toString();
-  // }
 
 
 
 
   return (
-    <form action="https://government-backend-production.up.railway.app/upload-image" method="POST" enctype="multipart/form-data">
+    <form action="localhost:5000/upload-image" method="POST" enctype="multipart/form-data">
     <div className="container mx-auto p-4 lg:w-3/4 xl:w-2/3">
       <div className="flex flex-col lg:flex-row justify-center lg:justify-between">
         <div className="mb-4 lg:mr-4">
