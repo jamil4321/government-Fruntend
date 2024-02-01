@@ -37,12 +37,16 @@ export default function FileDetailComponent() {
       <h3 className="text-lg font-bold">Date: {localStorageDate}</h3>
       <h3 className="text-lg font-bold">From: {localStoragelocation}</h3>
     </div>
+    <div style={{display:'flex' , flexDirection:'column' , marginBottom:'15px'}}>
+
     <img
       src={localStorageqrget}
       className="w-full  border border-green-500"
       alt=""
       style={{ width: '100px', height: 'auto' }}
-    />
+      />
+    <a href={localStorageqrget} download><button style={{padding:'7px' , backgroundColor:' rgb(200 230 201)' , color:'green' , fontSize:'10px' , width:'100px' , height:'25px'}}>Download QrCode</button></a>
+      </div>
     <div className="flex items-center">
       <h3 className="text-lg font-bold mr-2">Category</h3>
       <select
