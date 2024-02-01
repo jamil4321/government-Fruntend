@@ -1,17 +1,16 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
-// import axios from "axios";
+import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
-// let uniqueId;
+let uniqueId;
 export default function DateAprove() {
   const [image, setImage] = useState("");
   const [name, setName] = useState('');
   const [select, setSelect] = useState('');
   const [password, setPassword] = useState('');
-  const [Qrcode, setQrCode] = useState('');
+  const [ActualQrcode, setQrCode] = useState('');
   let uniqueId;
 
   const covertToBase64 = (e) => {
@@ -59,6 +58,7 @@ export default function DateAprove() {
       const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
 
       const response = await QRCode.toDataURL(QrNavigate);
+      console.log('Qrcode' , response);
       setQrCode(response);
       localStorage.setItem("QrCode", response);
     } catch (error) {
@@ -79,7 +79,9 @@ export default function DateAprove() {
       console.log("Invalid email");
       return;
     }
-
+    
+    const QrGet = localStorage.getItem("QrCode");
+    console.log(QrGet);
     try {
       const response = await fetch("https://government-backend-production.up.railway.app/upload-image", {
         method: "POST",
@@ -96,25 +98,24 @@ export default function DateAprove() {
           password,
           fileid: '002345',
           date,
-          uniqueId,
           location,
+          QrGet,
+          uniqueId
         }),
       });
-
+      
       // Check if the request was successful
       if (!response.ok) {
         console.error("Failed to upload image");
         return;
       }
-
+  
       // ... rest of your code for handling the response
 
     } catch (error) {
       console.error("Error in fetch:", error);
     }
 
-    const QrGet = localStorage.getItem("QrCode");
-    console.log(QrGet);
 
     Swal.fire({
       title: "File Added Seccessfully",
@@ -128,7 +129,7 @@ export default function DateAprove() {
       },
       footer: '<span style="color: red;">Note: There is no other option to download QR code later</span>'
     });
-
+    
   }
 
 
@@ -187,11 +188,11 @@ export default function DateAprove() {
           />
         </div>
       </div>
-
       <div className="flex flex-col lg:flex-row items-center mt-8 space-y-4 lg:space-y-0 lg:space-x-4">
         <div>
-          <label htmlFor="dropzone-file" style={{ width: '250px' }} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+        <label htmlFor="dropzone-file" id="responsiveuploadfile" style={{width: '250px'}}
+      className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+    >            <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
               </svg>
@@ -200,27 +201,12 @@ export default function DateAprove() {
             <input id="dropzone-file" type="file"  accept=".pdf, image/*" onChange={covertToBase64} className="hidden" name="file" />
           </label>
         </div>
-        {image && <img className="w-24 h-24" src={image} alt="Uploaded" />}
         <div>
-          <label htmlFor="dropzone-file" style={{ width: '250px' }} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-              </svg>
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">upload File</span> </p>
-            </div>
-            <input id="dropzone-file" accept="image/*" type="file" onChange={covertToBase64} className="hidden" />
+          <label htmlFor="dropzone-file" style={{width: '250px',backgroundImage: `url(${image})`,backgroundPosition: 'center',backgroundSize: 'cover',}} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
           </label>
-        </div>
+        </div> 
         <div>
-          <label htmlFor="dropzone-file" style={{ width: '250px' }} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-              </svg>
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">upload File</span> </p>
-            </div>
-            <input id="dropzone-file" accept="image/*" type="file" onChange={covertToBase64} className="hidden" />
+          <label htmlFor="dropzone-file" style={{width: '250px',backgroundImage: `url(${image})`,backgroundPosition: 'center',backgroundSize: 'cover',}} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
           </label>
         </div>
       </div>
@@ -240,3 +226,4 @@ export default function DateAprove() {
 
   )
 }
+
