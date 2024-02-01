@@ -199,6 +199,7 @@ if (logout && logout.length > 0) {
                           localStorage.setItem("image", JSON.stringify(data.image))
                           localStorage.setItem("date", JSON.stringify(data.date))
                           localStorage.setItem("location", JSON.stringify(data.location))
+                          localStorage.setItem("Qrcode", JSON.stringify(data.QrGet))
                           window.location = "/FileView"
                         }}
                           className="flex items-center gap-3" size="sm">
