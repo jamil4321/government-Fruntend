@@ -22,7 +22,7 @@ export default function FileDetailComponent() {
   }, [])
 
   function getImage() {
-    fetch("https://government-backend-production.up.railway.app/get-image", {
+    fetch("https://government-backendpdated.vercel.app/get-image", {
       method: "GET",
     }).then((res) => res.json()).then((data) => {
       setAllImage(data.data)
