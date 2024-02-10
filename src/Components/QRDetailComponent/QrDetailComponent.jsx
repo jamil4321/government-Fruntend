@@ -26,7 +26,7 @@ export default function QrDetailComponent() {
       const handleLogin = async (e) => {
         e.preventDefault();
     
-        fetch("https://government-backend-production.up.railway.app/get-image", {
+        fetch("https://government-backendpdated.vercel.app/get-image", {
           method: "GET",
         })
         .then((res) => res.json())
