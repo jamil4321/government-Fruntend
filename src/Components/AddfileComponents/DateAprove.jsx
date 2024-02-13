@@ -105,7 +105,7 @@ export default function DateAprove() {
       uniqueId = Math.round(Math.random() * 10000000000000);
       console.log(uniqueId, "uniqueid");
 
-      const QrNavigate = `https://governmentproject.netlify.app/Qrdetail/id/id:${uniqueId}`;
+      const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
 
       const response = await QRCode.toDataURL(QrNavigate);
       console.log('Qrcode', response);
