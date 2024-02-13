@@ -35,7 +35,7 @@ export default function DateAprove() {
     else {
       setTextt("Upload File")
     }
-  })
+  },[])
 
   const covertToBase64 = (e) => {
     var reader = new FileReader();
