@@ -1,5 +1,6 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
+import Swal from 'sweetalert2';
 import {
   Card,
   CardHeader,
@@ -12,8 +13,8 @@ import {
   Tooltip,
 } from "@material-tailwind/react";
 import {List, ListItem, ListItemPrefix } from "@material-tailwind/react";
-import { PowerIcon } from "@heroicons/react/24/solid";
-// import { useNavigate } from 'react-router-dom';
+import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios
 import '../../App.css'
@@ -26,7 +27,7 @@ let datalength;
 export default function TableWeb() {
   const [allImage, setAllImage] = useState([]);
   const [search, setSearch] = useState('');
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getImage()
@@ -101,7 +102,6 @@ if (logout && logout.length > 0) {
         <table className="mt-4 w-full min-w-max table-auto text-left">
         <thead>
             <tr>
-              
               {TABLE_HEAD.map((head) => (
                 <th key={head} className=" border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">
                   <Typography variant="small" color="blue-gray" className="font-normal leading-none opacity-70">
@@ -112,19 +112,14 @@ if (logout && logout.length > 0) {
             </tr>
           </thead>
           <tbody>
-          {
-            /* eslint-disable array-callback-return */
-          allImage.map((data, index) => {
+          {allImage.map((data, index) => {
               const isLast = index === allImage.length - 1;
               const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
-              if (
-                data &&
-                data.name &&
-                (search.toLowerCase() === data.name.toLowerCase() ||
-                  (search.length > 0 && data.name.toLowerCase().includes(search.toLowerCase())) ||
-                  search === "")
+              if (data && data.name && (search.toLowerCase() === data.name.toLowerCase() ||(search.length > 0 && data.name.toLowerCase().includes(search.toLowerCase())) || search === "")
               ) {
+
+            
                 return (
               <tr key={data.selct}>
                   <td className={classes}>
@@ -200,6 +195,8 @@ if (logout && logout.length > 0) {
                           localStorage.setItem("date", JSON.stringify(data.date))
                           localStorage.setItem("location", JSON.stringify(data.location))
                           localStorage.setItem("Qrcode", JSON.stringify(data.QrGet))
+                          localStorage.setItem("image2", JSON.stringify(data.image2))
+                          localStorage.setItem("image3", JSON.stringify(data.image3))
                           window.location = "/FileView"
                         }}
                           className="flex items-center gap-3" size="sm">
@@ -210,8 +207,7 @@ if (logout && logout.length > 0) {
                   </td>
                 </tr>
               );
-            }
-            })}
+            }})}
           </tbody>
         </table>
       </CardBody>
