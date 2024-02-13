@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable */
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
@@ -35,7 +36,8 @@ export default function DateAprove() {
     else {
       setTextt("Upload File")
     }
-  },[])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[img,image,img3])
 
   const covertToBase64 = (e) => {
     var reader = new FileReader();
