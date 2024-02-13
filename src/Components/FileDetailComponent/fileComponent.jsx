@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import '../../App.css';
 import { useState, useEffect } from "react";
@@ -14,6 +13,8 @@ export default function FileDetailComponent() {
   const localStorageDate = JSON.parse(localStorage.getItem("date"))
   const localStoragelocation = JSON.parse(localStorage.getItem("location")) 
   const localStorageqrget = JSON.parse(localStorage.getItem("Qrcode")) 
+  const localStorageimage2 = JSON.parse(localStorage.getItem("image2")) 
+  const localStorageimage3= JSON.parse(localStorage.getItem("image3")) 
 
 
   
@@ -70,23 +71,66 @@ export default function FileDetailComponent() {
       alt=""
       style={{ width: '100%', height: 'auto' }}
     />
+    <br />
+    <img
+      src={localStorageimage2}
+      className="w-full max-w-3xl mx-auto border border-green-500"
+      alt=""
+      style={{ width: '100%', height: 'auto' }}
+    />
+    <br />
+    <img
+      src={localStorageimage3}
+      className="w-full max-w-3xl mx-auto border border-green-500"
+      alt=""
+      style={{ width: '100%', height: 'auto' }}
+    />
   </div>
   {
     allImage.map((data, item) => {
       if (localStorageName === data.name) {
-        if (data.image && data.image.includes("data:application/pdf;")) {
-          console.log("pdf found in", data.image);
+        if (data.image && data.image.includes("data:application/pdf;") ) {
           return (
             <div key={item} className="text-center mt-4">
               <a href={data.image} target="_blank" rel="noopener noreferrer" download>
-                <button className="w-32 h-10 bg-green-500 text-white rounded-md">Download Pdf</button>
+                <button className="w-32 h-10 bg-green-500 text-white rounded-md">Download Pdf 1</button>
               </a>
             </div>
           )
-        } else {
-          console.log("no pdf found");
         }
-      }
+    }
+      return null;
+    })
+  }
+  {
+    allImage.map((data, item) => {
+      if (localStorageName === data.name) {
+        if (data.image2 && data.image2.includes("data:application/pdf;") ) {
+          return (
+            <div key={item} className="text-center mt-4">
+              <a href={data.image2} target="_blank" rel="noopener noreferrer" download>
+                <button className="w-32 h-10 bg-green-500 text-white rounded-md">Download Pdf 2</button>
+              </a>
+            </div>
+          )
+        }
+    }
+      return null;
+    })
+  }
+  {
+    allImage.map((data, item) => {
+      if (localStorageName === data.name) {
+        if (data.image3 && data.image3.includes("data:application/pdf;") ) {
+          return (
+            <div key={item} className="text-center mt-4">
+              <a href={data.image3} target="_blank" rel="noopener noreferrer" download>
+                <button className="w-32 h-10 bg-green-500 text-white rounded-md">Download Pdf 3</button>
+              </a>
+            </div>
+          )
+        }
+    }
       return null;
     })
   }
