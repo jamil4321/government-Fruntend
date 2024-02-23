@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable */
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
@@ -7,6 +5,9 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
 let uniqueId;
+
+var alldatalength;
+
 export default function DateAprove() {
   const [image, setImage] = useState("");
   const [img, setImage2] = useState("");
@@ -18,26 +19,106 @@ export default function DateAprove() {
   const [Textt, setTextt] = useState('');
   const [Textt2, setTextt2] = useState('');
   const [Textt3, setTextt3] = useState('');
+  const [imgpresent, setImagepreent] = useState('');
+  const [svgpresent, Setsvgpresent] = useState('');
+  const [imgpresent2, setImagepreent2] = useState('');
+  const [svgpresent2, Setsvgpresent2] = useState('');
+  const [imgpresent3, setImagepreent3] = useState('');
+  const [svgpresent3, Setsvgpresent3] = useState('');
+  const [getimages, Setgetallimages] = useState('');
+  // const [fileidd, setFileid] = useState('');
+
+  var email = JSON.parse(localStorage.getItem("email"));
+  localStorage.setItem("email", JSON.stringify(email))
+
   let uniqueId;
 
+  async function getImageData() {
 
-  localStorage.setItem("image", image);
-  localStorage.setItem("ii", img);
-  localStorage.setItem("iii", img3);
+    fetch("https://government-backendpdated.vercel.app/get-image", {
+      method: "GET",
+    }).then((res) => res.json())
+      .then((data) => {
+        Setgetallimages(data.data)
+        console.log("data", data.data);
+
+      })
+  }
+  useEffect(() => {
+    getImageData()
+  })
+  alldatalength = getimages.length;
+  var concatid = alldatalength + 1
+  var num = "00";
+  var incrementalldetaildata = num.concat(concatid);
+  // setFileid(incrementalldetaildata)
+
+
   useEffect(() => {
 
-    if (img.includes("data:application/pdf;")) {
-      setTextt2("pdf uploaded")
-    } else if (image.includes("data:application/pdf;")) {
-      setTextt("pdf uploaded")
-    } else if (img3.includes("data:application/pdf;")) {
-      setTextt3("pdf uploaded")
+
+    if (image.includes("data:application/pdf;")) {
+      setTextt("Pdf Uploaded")
+      Setsvgpresent3('')
+      setImagepreent3('show')
+    } else if (image.includes("data:image/png")) {
+      setTextt("Document Uploaded")
+      Setsvgpresent3('show')
+      setImagepreent3('')
     }
     else {
+      Setsvgpresent3('open')
       setTextt("Upload File")
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[img,image,img3])
+
+    if (img.includes("data:application/pdf;")) {
+      setTextt2("Pdf Uploaded")
+      Setsvgpresent2('')
+      setImagepreent2('show')
+    } else if (img.includes("data:image/png")) {
+      setTextt2("Document Uploaded")
+      Setsvgpresent2('show')
+      setImagepreent2('')
+    }
+    else {
+      Setsvgpresent2('open')
+      setTextt2("Upload File")
+    }
+
+
+    if (img3.includes("data:application/pdf;")) {
+      setTextt3("Pdf Uploaded")
+      Setsvgpresent('')
+      setImagepreent('show')
+    } else if (img3.includes("data:image/png")) {
+      setTextt3("Document Uploaded")
+      Setsvgpresent('show')
+      setImagepreent('')
+    }
+    else {
+      Setsvgpresent('open')
+      setTextt3("Upload File")
+    }
+
+
+
+    if (image.includes("data:image/png;")) {
+      setTextt("Document Uploaded")
+      Setsvgpresent3('show')
+      setImagepreent3('')
+    }
+    if (img.includes("data:image/png;")) {
+      setTextt2("Document Uploaded")
+      Setsvgpresent2('show')
+      setImagepreent2('')
+    }
+    if (img3.includes("data:image/png;")) {
+      setTextt3("Document Uploaded")
+      Setsvgpresent('show')
+      setImagepreent('')
+    }
+
+  })
 
   const covertToBase64 = (e) => {
     var reader = new FileReader();
@@ -51,13 +132,14 @@ export default function DateAprove() {
     };
   };
 
+
   const covertToBase65 = (ev) => {
     var reader1 = new FileReader();
     reader1.readAsDataURL(ev.target.files[0]);
     reader1.onload = () => {
       console.log(reader1.result);
       setImage2(reader1.result);
-      localStorage.setItem("secondimage", reader1.result);
+      // localStorage.setItem("secondimage", reader1.result);
     };
     reader1.onerror = (error) => {
       console.log("Error: ", error);
@@ -70,13 +152,26 @@ export default function DateAprove() {
     reader.onload = () => {
       console.log(reader.result);
       setImage3(reader.result);
-      localStorage.setItem("thirdimage", reader.result);
+      // localStorage.setItem("thirdimage", reader.result);
     };
     reader.onerror = (error) => {
       console.log("Error: ", error);
     };
   };
-
+  //   setTimeout(() => {
+  //   localStorage.setItem("name", JSON.stringify(""))
+  //   localStorage.setItem("fileid", JSON.stringify(""))
+  //   localStorage.setItem("select", JSON.stringify(""))
+  //   localStorage.setItem("image", JSON.stringify(""))
+  //   localStorage.setItem("date", JSON.stringify(""))
+  //   localStorage.setItem("location", JSON.stringify(""))
+  //   localStorage.setItem("Qrcode", JSON.stringify(""))
+  //   localStorage.setItem("image2", JSON.stringify(""))
+  //   localStorage.setItem("image3", JSON.stringify(""))
+  //   localStorage.setItem("QrCode", JSON.stringify(""))
+  //   localStorage.setItem("iii", JSON.stringify(""))
+  //   localStorage.setItem("ii", JSON.stringify(""))
+  // }, 10000);
 
   const formatDate = () => {
     const options = {
@@ -101,6 +196,9 @@ export default function DateAprove() {
   var logoutEmail = JSON.parse(localStorage.getItem('email'));
   console.log("logoutEmail", logoutEmail);
 
+
+
+
   async function uploadImage(e) {
     e.preventDefault();
 
@@ -118,7 +216,7 @@ export default function DateAprove() {
       console.log(error);
     }
 
-    localStorage.setItem("QrDetailName", JSON.stringify(name));
+    // localStorage.setItem("QrDetailName", JSON.stringify(name));
 
     var location = '';
 
@@ -133,17 +231,24 @@ export default function DateAprove() {
       return;
     }
 
+
+
+    localStorage.setItem("image", JSON.stringify((image)));
+    localStorage.setItem("ii", img);
+    localStorage.setItem("iii", img3);
+
     const QrGet = localStorage.getItem("QrCode");
     const ii = localStorage.getItem("ii");
     const iii = localStorage.getItem("iii");
     // const image3 = localStorage.getItem("image3");
     // if(name && select && password){
     if (name.length > 0 && password.length > 0 && select.length > 0) {
-      var uniquefileid = Math.round(Math.random() * 1000000)
+
       try {
         const response = await fetch("https://government-backendpdated.vercel.app/upload-image", {
           method: "POST",
           crossDomain: true,
+          mode: "cors",
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -154,7 +259,7 @@ export default function DateAprove() {
             name,
             select,
             password,
-            fileid: uniquefileid,
+            fileid: incrementalldetaildata,
             date,
             location,
             QrGet,
@@ -162,25 +267,51 @@ export default function DateAprove() {
             ii,
             iii
           }),
-        });
+        })
+
+
+
+        localStorage.setItem("name", JSON.stringify(name))
+        localStorage.setItem("fileid", JSON.stringify(incrementalldetaildata))
+        localStorage.setItem("select", JSON.stringify(select))
+        localStorage.setItem("image", JSON.stringify(image))
+        localStorage.setItem("date", JSON.stringify(date))
+        localStorage.setItem("location", JSON.stringify(location))
+        localStorage.setItem("Qrcode", JSON.stringify(QrGet))
+        localStorage.setItem("image2", JSON.stringify(ii))
+        localStorage.setItem("image3", JSON.stringify(iii))
+
+
 
         // Check if the request was successful
         if (!response.ok) {
           console.error("Failed to upload image");
           return "... uploading";
-        } else {
+        } else {  
           Swal.fire({
             title: "File Added Seccessfully",
             html: `<div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><img src=${QrGet} alt="no image" style="max-width: 100%; height: auto;" /></div>`,
             showCancelButton: true,
             confirmButtonColor: 'green',
-            confirmButtonText: `<a style="color: white; text-decoration: none; cursor: pointer;" href=${QrGet} download >Download</a>`,
-            cancelButtonText: '<a style="color: white; text-decoration: none;" href="/Dashboard">Ok</a>',
+            confirmButtonText: 'Download',
+            cancelButtonText: '<a style="color: white; text-decoration: none;" href="/FileView">Ok</a>',
             customClass: {
               popup: 'responsive-sweetalert'
             }
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // Trigger download
+              const link = document.createElement('a');
+              link.href = QrGet;
+              link.download = 'filename'; // You may want to set a specific filename here
+              document.body.appendChild(link);
+              link.click();
+              document.body.removeChild(link);
+          
+              // Navigate to "/Dashboard" route
+              window.location.href = "/Dashboard";
+            }
           });
-
         }
 
         // ... rest of your code for handling the response
@@ -212,7 +343,6 @@ export default function DateAprove() {
   };
 
   const newDate = formatDate2();
-  console.log("new date", newDate);
 
   return (
     <form action="https://government-backendpdated.vercel.app/upload-image" method="POST" enctype="multipart/form-data">
@@ -279,9 +409,19 @@ export default function DateAprove() {
             }} className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                </svg>
+                {svgpresent3 &&
+                  (
+                    <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                    </svg>
+                  )
+                }
+                {imgpresent3 &&
+                  (
+
+                    <img src="https://th.bing.com/th/id/OIP.TxlxbMcPCrVPG71U2H6bbAHaHa?w=219&h=219&c=7&r=0&o=5&dpr=1.1&pid=1.7" style={{ width: '40px', height: '40px' }} alt="no image" />
+                  )
+                }
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">{Textt ? Textt : "Upload File"}</span> </p>
               </div>
               <input type="file" accept=".pdf, image/*" onChange={covertToBase64} className="hidden" name="file1" />
@@ -299,9 +439,19 @@ export default function DateAprove() {
             }}
               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                </svg>
+                {svgpresent2 &&
+                  (
+                    <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                    </svg>
+                  )
+                }
+                {imgpresent2 &&
+                  (
+
+                    <img src="https://th.bing.com/th/id/OIP.TxlxbMcPCrVPG71U2H6bbAHaHa?w=219&h=219&c=7&r=0&o=5&dpr=1.1&pid=1.7" style={{ width: '40px', height: '40px' }} alt="no image" />
+                  )
+                }
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">{Textt2 ? Textt2 : "Upload File"}</span> </p>
               </div>
               <input type="file" accept=".pdf, image/*" onChange={covertToBase65} className="hidden" name="file2" />
@@ -318,9 +468,19 @@ export default function DateAprove() {
             }}
               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                </svg>
+                {svgpresent &&
+                  (
+                    <svg className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                      <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                    </svg>
+                  )
+                }
+                {imgpresent &&
+                  (
+
+                    <img src="https://th.bing.com/th/id/OIP.TxlxbMcPCrVPG71U2H6bbAHaHa?w=219&h=219&c=7&r=0&o=5&dpr=1.1&pid=1.7" style={{ width: '40px', height: '40px' }} alt="no image" />
+                  )
+                }
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">{Textt3 ? Textt3 : "Upload File"}</span> </p>
               </div>
               <input type="file" accept=".pdf, image/*" onChange={covertToBase66} className="hidden" name="file3" />
@@ -329,10 +489,11 @@ export default function DateAprove() {
 
         </div>
 
-        <div className="mt-8">
+        <div className="mt-8" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '780px' }}>
           <button
             onClick={uploadImage}
             className="w-full lg:w-1/2 bg-green-600 text-white py-2 rounded"
+            style={{ width: '250px' }}
           >
             Upload File
           </button>
