@@ -6,11 +6,17 @@ import Swal from 'sweetalert2';
 export default function LoginComponent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isButtonDisabled, setButtonDisabled] = useState(false);  // const [fileidd, setFileid] = useState('');
 
+    var hasemail = localStorage.getItem("email")
 
-    
+    if (hasemail.length > 2) {
+        window.location = '/Dashboard'
+    }
+
     const handleLogin = (e) => {
         e.preventDefault();
+        setButtonDisabled(true)
         console.log("email -->", email);
         console.log("password -->", password);
         fetch("https://government-backendpdated.vercel.app/login-user", {
@@ -26,47 +32,55 @@ export default function LoginComponent() {
                 password,
             }),
         })
-        .then((res) => {
-            if (!res.ok) {
+            .then((res) => {
+                if (!res.ok) {
+                    Swal.fire({
+                        title: "Invalid Email or Password",
+                        icon: "error",
+                        showConfirmButton: false
+                    });
+                    setButtonDisabled(false)
+
+                }
+                return res.json();
+            })
+            .then((data) => {
+                localStorage.setItem("email", JSON.stringify(email));
+                console.log(data, "userRegister");
                 Swal.fire({
-                    title: "Invalid Email or Password",
-                    icon: "error",
+                    title: "Login Successfully",
+                    icon: "success",
                     showConfirmButton: false
                 });
-            }
-            return res.json();
-        })
-        .then((data) => {
-            localStorage.setItem("email", JSON.stringify(email));
-            console.log(data, "userRegister");
-            Swal.fire({
-                title: "Login Successfully",
-                icon: "success",
-                showConfirmButton: false
-            });
+                setButtonDisabled(false)
+
             
-            if(!data){
+
+                if (!data) {
+                    Swal.fire({
+                        title: "Invalid Email or Password",
+                        icon: "error",
+                        showConfirmButton: false
+                    });
+                    setButtonDisabled(false)
+
+                }
+                // Redirect or perform any other actions after successful login
+                setTimeout(() => {
+                    window.location = "/Dashboard";
+                }, 2000);
+            })
+            .catch((error) => {
+                console.error("Login failed:", error);
                 Swal.fire({
                     title: "Invalid Email or Password",
                     icon: "error",
                     showConfirmButton: false
                 });
-            }
-            // Redirect or perform any other actions after successful login
-            setTimeout(() => {
-                window.location = "/Dashboard";
-            }, 2000);
-        })
-        .catch((error) => {
-            console.error("Login failed:", error);
-            Swal.fire({
-                title: "Invalid Email or Password",
-                icon: "error",
-                showConfirmButton: false
+                setButtonDisabled(true)
             });
-        });
     };
-    
+
     return (
         <div className="main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', height: '100vh' }}>
             <div className="login" style={{ maxWidth: '400px', width: '80%' }}>
@@ -88,8 +102,11 @@ export default function LoginComponent() {
                             placeholder="Password"
                             style={{ ...inputStyle, marginTop: '15px', width: '100%' }}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled={isButtonDisabled}
                         />
-                        <button style={buttonStyle}>Login</button>
+                        <button style={buttonStyle}>
+                            {isButtonDisabled ? "Logining..." : "Login"}
+                        </button>
                     </form>
                 </div>
             </div>
