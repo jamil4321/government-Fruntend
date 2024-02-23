@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import QRCode from "qrcode";
+import { Document } from "react-pdf";
 let uniqueId;
 
 var alldatalength;
@@ -26,7 +27,9 @@ export default function DateAprove() {
   const [imgpresent3, setImagepreent3] = useState('');
   const [svgpresent3, Setsvgpresent3] = useState('');
   const [getimages, Setgetallimages] = useState('');
-  // const [fileidd, setFileid] = useState('');
+  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);  // const [fileidd, setFileid] = useState('');
+
 
   var email = JSON.parse(localStorage.getItem("email"));
   localStorage.setItem("email", JSON.stringify(email))
@@ -198,9 +201,9 @@ export default function DateAprove() {
 
 
 
-
   async function uploadImage(e) {
     e.preventDefault();
+    setButtonDisabled(true);
 
     try {
       uniqueId = Math.round(Math.random() * 10000000000000);
@@ -212,8 +215,10 @@ export default function DateAprove() {
       console.log('Qrcode', response);
       setQrCode(response);
       localStorage.setItem("QrCode", response);
+      setButtonDisabled(true);
     } catch (error) {
       console.log(error);
+      setButtonDisabled(true);
     }
 
     // localStorage.setItem("QrDetailName", JSON.stringify(name));
@@ -287,7 +292,7 @@ export default function DateAprove() {
         if (!response.ok) {
           console.error("Failed to upload image");
           return "... uploading";
-        } else {  
+        } else {
           Swal.fire({
             title: "File Added Seccessfully",
             html: `<div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><img src=${QrGet} alt="no image" style="max-width: 100%; height: auto;" /></div>`,
@@ -303,15 +308,16 @@ export default function DateAprove() {
               // Trigger download
               const link = document.createElement('a');
               link.href = QrGet;
-              link.download = 'filename'; // You may want to set a specific filename here
+              link.download = `${name}_QrCode.png`; 
               document.body.appendChild(link);
               link.click();
               document.body.removeChild(link);
-          
+
               // Navigate to "/Dashboard" route
               window.location.href = "/Dashboard";
             }
           });
+          setButtonDisabled(false);
         }
 
         // ... rest of your code for handling the response
@@ -494,8 +500,9 @@ export default function DateAprove() {
             onClick={uploadImage}
             className="w-full lg:w-1/2 bg-green-600 text-white py-2 rounded"
             style={{ width: '250px' }}
+            disabled={isButtonDisabled}
           >
-            Upload File
+            {isButtonDisabled ? "Uploading..." : "Upload File"}
           </button>
         </div>
 
