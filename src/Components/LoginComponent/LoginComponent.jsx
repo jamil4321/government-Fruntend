@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from 'sweetalert2';
 
 
@@ -11,6 +11,8 @@ export default function LoginComponent() {
     
     const handleLogin = (e) => {
         e.preventDefault();
+        console.log("email -->", email);
+        console.log("password -->", password);
         fetch("https://government-backendpdated.vercel.app/login-user", {
             method: "POST",
             crossDomain: true,
