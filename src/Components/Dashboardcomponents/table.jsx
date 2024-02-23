@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable */
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import Swal from 'sweetalert2';
@@ -72,6 +70,18 @@ if (logout && logout.length > 0) {
   setLogout("Login");
   window.location = "/";
 }
+localStorage.setItem("name", JSON.stringify(""))
+localStorage.setItem("fileid", JSON.stringify(""))
+localStorage.setItem("select", JSON.stringify(""))
+localStorage.setItem("image", JSON.stringify(""))
+localStorage.setItem("date", JSON.stringify(""))
+localStorage.setItem("location", JSON.stringify(""))
+localStorage.setItem("Qrcode", JSON.stringify(""))
+localStorage.setItem("image2", JSON.stringify(""))
+localStorage.setItem("image3", JSON.stringify(""))
+localStorage.setItem("QrCode", JSON.stringify(""))
+localStorage.setItem("iii", JSON.stringify(""))
+localStorage.setItem("ii", JSON.stringify(""))
  
   return (
     <Card className="h-full w-full" id="cardresponsive">
@@ -93,7 +103,7 @@ if (logout && logout.length > 0) {
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full md:w-72">
             <Input
-              label="Search"
+              label="Search By Name"
               icon={<MagnifyingGlassIcon className="h-5 w-5" />}
               onChange={(e) => setSearch(e.target.value)}
             />
