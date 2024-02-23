@@ -4,19 +4,19 @@ import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
 import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
 import { Webcard2 } from '../Components/Dashboardcomponents/card2';
 import TableWeb from '../Components/Dashboardcomponents/table';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-// import axios from 'axios'; // Import axios
+import axios from 'axios'; // Import axios
 
-// const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"];
+const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"];
 
 
 function Dashboard() {
   const [allImage, setAllImage] = useState([]);
-  // const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const [FileAddToday, setFileAddToday] = useState('0');
   const [filesAddedThisMonth, setfilesAddedThisMonth] = useState('0')
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getImage()
