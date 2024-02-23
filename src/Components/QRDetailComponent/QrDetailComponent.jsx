@@ -1,18 +1,24 @@
 import React, { useState, useEffect } from "react";
-import {  useParams } from "react-router-dom"; // Updated import
+import { Link, useNavigate, useParams } from "react-router-dom"; // Updated import
 // import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function QrDetailComponent() {
   const [password, setPassword] = useState('');
   const [url, setUrl] = useState('');
-
+  
   localStorage.setItem("name", JSON.stringify(""))
   localStorage.setItem("fileid", JSON.stringify(""))
   localStorage.setItem("select", JSON.stringify(""))
   localStorage.setItem("image", JSON.stringify(""))
   localStorage.setItem("date", JSON.stringify(""))
   localStorage.setItem("location", JSON.stringify(""))  
+  localStorage.setItem("Qrcode", JSON.stringify(""))  
+  localStorage.setItem("image2", JSON.stringify(""))  
+  localStorage.setItem("image3", JSON.stringify(""))  
+  localStorage.setItem("QrCode", JSON.stringify(""))  
+  localStorage.setItem("ii", JSON.stringify(""))  
+  localStorage.setItem("iii", JSON.stringify(""))  
 
   const { id } = useParams();
   useEffect(() => {
@@ -42,6 +48,9 @@ export default function QrDetailComponent() {
              localStorage.setItem("image", JSON.stringify(item.image))
             localStorage.setItem("date", JSON.stringify(item.date))
             localStorage.setItem("location", JSON.stringify(item.location))  
+            localStorage.setItem("Qrcode", JSON.stringify(item.QrGet))  
+            localStorage.setItem("image2", JSON.stringify(item.image2))  
+            localStorage.setItem("image3", JSON.stringify(item.image3))  
     
               return; // Exit the loop once a match is found
             }
