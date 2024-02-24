@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import "../../App.css";
 import { Link } from "react-router-dom";
 
@@ -57,14 +57,14 @@ export function Websidebar(props) {
               Add File
             </ListItem>
           </Link>
-          <h3 style={{ marginLeft: "15px", marginTop: "20px" }}>SUPPORT</h3>
-          <br />
-          <ListItem className="cardbackground" onClick={(e) => { setLogout(e.target.value) }}>
-            <ListItemPrefix>
-              <PowerIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            logout
-          </ListItem>
+          <button>
+            <ListItem className="cardbackground" onClick={(e) => { setLogout(e.target.value) }}>
+              <ListItemPrefix>
+                <PowerIcon className="h-5 w-5" />
+              </ListItemPrefix>
+              logout
+            </ListItem>
+          </button>
         </List>
       </Card>
     </div>
