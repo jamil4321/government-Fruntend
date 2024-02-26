@@ -1,14 +1,13 @@
-/* eslint-disable */
-import React from "react"
-import '../../App.css'
-import { useState, useEffect } from "react"
-import { Worker, Viewer } from '@react-pdf-viewer/core'
-import '@react-pdf-viewer/core/lib/styles/index.css'
-import { pdfjs } from 'react-pdf'
+import React from "react";
+import '../../App.css';
+import { useState, useEffect } from "react";
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import { pdfjs } from 'react-pdf';
 
 export default function FileDetailComponent() {
-  const [allImage, setAllImage] = useState([])
-  const [location, setLocation] = useState('')
+  const [allImage, setAllImage] = useState([]);
+  const [location, setLocation] = useState('');
 
 
   const localStorageName = JSON.parse(localStorage.getItem("name"))
@@ -26,14 +25,14 @@ export default function FileDetailComponent() {
   const localStorageimage3parse = JSON.parse(localStorage.getItem("image3"))
 
   // // Check if the data is an image
-  // const image1IsImage = localStorageimage && localStorageimage.startsWith("data:image")
-  // const image2IsImage = localStorageimage2 && localStorageimage2.startsWith("data:image")
-  // const image3IsImage = localStorageimage3 && localStorageimage3.startsWith("data:image")
+  // const image1IsImage = localStorageimage && localStorageimage.startsWith("data:image");
+  // const image2IsImage = localStorageimage2 && localStorageimage2.startsWith("data:image");
+  // const image3IsImage = localStorageimage3 && localStorageimage3.startsWith("data:image");
 
   // Check if the data is a PDF
-  // const image1IsPDF = localStorageimage && localStorageimage.startsWith("data:application/pdf")
-  // const image2IsPDF = localStorageimage2 && localStorageimage2.startsWith("data:application/pdf")
-  // const image3IsPDF = localStorageimage3 && localStorageimage3.startsWith("data:application/pdf")
+  // const image1IsPDF = localStorageimage && localStorageimage.startsWith("data:application/pdf;");
+  // const image2IsPDF = localStorageimage2 && localStorageimage2.startsWith("data:application/pdf;");
+  // const image3IsPDF = localStorageimage3 && localStorageimage3.startsWith("data:application/pdf;");
 
 
 
@@ -50,12 +49,12 @@ export default function FileDetailComponent() {
       setAllImage(data.data)
     })
   }
-  let pdfRendered = false
-  let pdfRendered2 = false
-  let pdfRendered3 = false
-  var imgflag1 = false
-  var imgflag2 = false
-  var imgflag3 = false
+  let pdfRendered = false;
+  let pdfRendered2 = false;
+  let pdfRendered3 = false;
+  var imgflag1 = false;
+  var imgflag2 = false;
+  var imgflag3 = false;
 
   return (
     <div className="max-w-5xl mx-auto p-4">
@@ -127,11 +126,11 @@ export default function FileDetailComponent() {
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
-            )
+            );
           } else {
 
           }
-          return null
+          return null;
         })
       }
       {
@@ -149,9 +148,9 @@ export default function FileDetailComponent() {
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
-            )
+            );
           }
-          return null
+          return null;
         })
       }
       {
@@ -169,9 +168,9 @@ export default function FileDetailComponent() {
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
-            )
+            );
           }
-          return null
+          return null;
         })
       }
 
@@ -189,9 +188,9 @@ export default function FileDetailComponent() {
                 />
                 <br />
               </div>
-            )
+            );
           }
-          return null
+          return null;
         })
       }
       {
@@ -208,9 +207,9 @@ export default function FileDetailComponent() {
                 />
                 <br />
               </div>
-            )
+            );
           }
-          return null
+          return null;
         })
       }
       {
@@ -227,14 +226,14 @@ export default function FileDetailComponent() {
                 />
                 <br />
               </div>
-            )
+            );
           }
-          return null
+          return null;
         })
       }
 
     </div >
 
 
-  )
+  );
 }
