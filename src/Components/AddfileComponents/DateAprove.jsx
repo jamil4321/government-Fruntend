@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import '../../App.css'
 import { useState, useEffect } from "react";
@@ -248,7 +247,7 @@ export default function DateAprove() {
     // const image3 = localStorage.getItem("image3");
     // if(name && select && password){
     if (name.length > 0 && password.length > 0 && select.length > 0) {
-
+      if(image.length > 0 || ii.length > 0 || iii.length > 0){
       try {
         const response = await fetch("https://government-backendpdated.vercel.app/upload-image", {
           method: "POST",
@@ -340,10 +339,16 @@ export default function DateAprove() {
       } catch (error) {
         console.error("Error in fetch:", error);
       }
-
+    }else{
+      Swal.fire({
+        title: "All The fields are required",
+        html: `<div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><h2 style="color:green;">File Requirment</h2></div>`,
+      });
+      setButtonDisabled(false)
+    }
     } else {
       Swal.fire({
-        title: "File Name , Password and Category is required",
+        title: "All The fields are required",
         html: `<div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><h2 style="color:green;">File Requirment</h2></div>`,
       });
       setButtonDisabled(false)
