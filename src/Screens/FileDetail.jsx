@@ -1,8 +1,7 @@
-/* eslint-disable */
-import '../App.css'
-import { Webnavbar } from '../Components/Dashboardcomponents/Navbar'
-import { Websidebar } from '../Components/Dashboardcomponents/sidebar'
-import FileDetailComponent from '../Components/FileDetailComponent/fileComponent'
+import '../App.css';
+import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
+import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
+import FileDetailComponent from '../Components/FileDetailComponent/fileComponent';
 
 
 function FileDetail() {
@@ -20,6 +19,6 @@ function FileDetail() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
-export default FileDetail
+export default FileDetail;
