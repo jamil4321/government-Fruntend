@@ -1,9 +1,8 @@
-/* eslint-disable */
-import React from "react"
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react"
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react"
+import React from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell, faEnvelope } from "@fortawesome/free-regular-svg-icons"
+import { faBell, faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import '../../App.css'
 
 
@@ -34,6 +33,6 @@ export function Webnavbar(props) {
         </div>
       </Navbar>
     </div>
-  )
+  );
 
 }
