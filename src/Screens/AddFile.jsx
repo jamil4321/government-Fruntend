@@ -1,10 +1,10 @@
-/* eslint-disable */
-import '../App.css'
-import { Webnavbar } from '../Components/Dashboardcomponents/Navbar'
-import { Websidebar } from '../Components/Dashboardcomponents/sidebar'
-import DateAprove from '../Components/AddfileComponents/DateAprove'
+import '../App.css';
+import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
+import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
+import DateAprove from '../Components/AddfileComponents/DateAprove';
 
 function AddFile() {
+
     return (
         <div>
             <Webnavbar display='none' />
@@ -12,13 +12,13 @@ function AddFile() {
                 <div id="sidebarVanish" style={{ backgroundColor: 'white', marginTop: '155px', width: '25%' }} >
                     <Websidebar Sout="/" Dboard="/Dashboard" />
                 </div>
-                <div className='cardresponsiveback  flex  justify-center' style={{ paddingTop: '130px', width: '75%' }} >
+                <div className='cardresponsiveback AddFileResponsive flex  justify-center' style={{ width: '100%' }} >
 
                     <DateAprove />
 
                 </div>
             </div>
         </div>
-    )
+    );
 }
-export default AddFile
+export default AddFile;
