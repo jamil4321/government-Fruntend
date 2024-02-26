@@ -1,15 +1,14 @@
-/* eslint-disable */
 import {
   Card,
   CardBody,
   CardFooter,
   Typography,
-  // Button,
-} from "@material-tailwind/react"
+  Button,
+} from "@material-tailwind/react";
 import '../../App.css'
 export function Webcard2(props) {
   return (
-    <Card className="mt-6 bg-white" id="card2" style={{ backgroundColor: props.color, color: props.text, display: "flex", justifyContent: 'center', width: '310px', marginLeft: '20px' }} >
+    <Card className="mt-6 bg-white" id="card2" style={{ backgroundColor: props.color, color: props.text, display: "flex", justifyContent: 'center', width: '300px', marginLeft: '20px' }} >
       <CardBody>
         <Typography variant="h6" color="blue-gray" className="mb-2 text-#56613F" >
           {props.heading1}
@@ -24,6 +23,6 @@ export function Webcard2(props) {
         </Typography>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
