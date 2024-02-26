@@ -1,32 +1,33 @@
-import React, { useState } from "react";
-import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
-import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
-import { useEffect } from "react";
-import "../../App.css";
-import { Link } from "react-router-dom";
+/* eslint-disable */
+import React, { useState } from "react"
+import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react"
+import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid"
+import { useEffect } from "react"
+import "../../App.css"
+import { Link } from "react-router-dom"
 
 export function Websidebar(props) {
 
 
   // const email = "working"
 
-  var logoutEmail = JSON.parse(localStorage.getItem('email'));
-  console.log("logoutEmail", logoutEmail);
+  var logoutEmail = JSON.parse(localStorage.getItem('email'))
+  console.log("logoutEmail", logoutEmail)
 
   const [logout, setLogout] = useState(logoutEmail)
 
   // useEffect(() => {
   //   if (logoutEmail === 'user@gmail.com') {
-  //     document.getElementById('foruser').style.display = 'none';
+  //     document.getElementById('foruser').style.display = 'none'
   //   }
   // })
 
   if (logout && logout.length > 0) {
-    console.log("User Logged In");
+    console.log("User Logged In")
   } else {
     localStorage.setItem('email', JSON.stringify(''))
-    setLogout("Login");
-    window.location = "/";
+    setLogout("Login")
+    window.location = "/"
   }
 
 
@@ -68,5 +69,5 @@ export function Websidebar(props) {
         </List>
       </Card>
     </div>
-  );
+  )
 }

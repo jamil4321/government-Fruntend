@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom"; // Updated import
-// import { useHistory } from "react-router-dom";
-import Swal from "sweetalert2";
+/* eslint-disable */
+import React, { useState, useEffect } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom" // Updated import
+// import { useHistory } from "react-router-dom"
+import Swal from "sweetalert2"
 
 export default function QrDetailComponent() {
-  const [password, setPassword] = useState('');
-  const [url, setUrl] = useState('');
+  const [password, setPassword] = useState('')
+  const [url, setUrl] = useState('')
   
   localStorage.setItem("name", JSON.stringify(""))
   localStorage.setItem("fileid", JSON.stringify(""))
@@ -20,28 +21,28 @@ export default function QrDetailComponent() {
   localStorage.setItem("ii", JSON.stringify(""))  
   localStorage.setItem("iii", JSON.stringify(""))  
 
-  const { id } = useParams();
+  const { id } = useParams()
   useEffect(() => {
-      var urid = id.slice(3, 17);
-      setUrl(urid);
-    }, [id]); 
+      var urid = id.slice(3, 17)
+      setUrl(urid)
+    }, [id]) 
 
     
     
     
       const handleLogin = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
     
         fetch("https://government-backendpdated.vercel.app/get-image", {
           method: "GET",
         })
         .then((res) => res.json())
         .then((data) => {
-          let fileFounded = false;
+          let fileFounded = false
     
           data.data.forEach((item) => {
             if (item.Qrcode === url && item.password === password) {
-              fileFounded = true;
+              fileFounded = true
               localStorage.setItem("name", JSON.stringify(item.name))
             localStorage.setItem("fileid", JSON.stringify(item.fileid))
             localStorage.setItem("select", JSON.stringify(item.select))
@@ -52,9 +53,9 @@ export default function QrDetailComponent() {
             localStorage.setItem("image2", JSON.stringify(item.image2))  
             localStorage.setItem("image3", JSON.stringify(item.image3))  
     
-              return; // Exit the loop once a match is found
+              return // Exit the loop once a match is found
             }
-          });
+          })
     
           if (fileFounded) {
             Swal.fire({
@@ -64,10 +65,10 @@ export default function QrDetailComponent() {
               customClass: {
                 popup: "left-popup",
               },
-            });
+            })
              setTimeout(() => {
             window.location = "/FileView"
-          }, 2000);
+          }, 2000)
           } else {
             Swal.fire({
               title: "File Not Founded",
@@ -76,9 +77,9 @@ export default function QrDetailComponent() {
                 popup: "left-popup",
               },
               showConfirmButton: false
-            });
+            })
           }
-        });
+        })
       }
     
       // Rest of your component code...
@@ -108,7 +109,7 @@ export default function QrDetailComponent() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 const inputStyle = {
@@ -119,7 +120,7 @@ const inputStyle = {
   paddingLeft: '20px',
   marginTop: '15px',
   backgroundColor: 'none',
-};
+}
 
 const buttonStyle = {
   border: '2px solid black',
@@ -129,4 +130,4 @@ const buttonStyle = {
   marginTop: '15px',
   backgroundColor: '#023D20',
   color: 'white',
-};
+}

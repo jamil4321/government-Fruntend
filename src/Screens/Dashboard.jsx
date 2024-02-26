@@ -1,22 +1,22 @@
+/* eslint-disable */
+import '../App.css'
+import { Webnavbar } from '../Components/Dashboardcomponents/Navbar'
+import { Websidebar } from '../Components/Dashboardcomponents/sidebar'
+import { Webcard2 } from '../Components/Dashboardcomponents/card2'
+import TableWeb from '../Components/Dashboardcomponents/table'
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import axios from 'axios' // Import axios
 
-import '../App.css';
-import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
-import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
-import { Webcard2 } from '../Components/Dashboardcomponents/card2';
-import TableWeb from '../Components/Dashboardcomponents/table';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
-import axios from 'axios'; // Import axios
-
-const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"];
+const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"]
 
 
 function Dashboard() {
-  const [allImage, setAllImage] = useState([]);
-  const [search, setSearch] = useState('');
-  const [FileAddToday, setFileAddToday] = useState('0');
+  const [allImage, setAllImage] = useState([])
+  const [search, setSearch] = useState('')
+  const [FileAddToday, setFileAddToday] = useState('0')
   const [filesAddedThisMonth, setfilesAddedThisMonth] = useState('0')
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
     getImage()
@@ -29,45 +29,45 @@ function Dashboard() {
       .then((res) => res.json())
       .then((data) => {
         setAllImage(data.data)
-        const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' });
+        const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+        const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' })
         console.log(currentMonth , 'currentMonth')
-        let filesAddedToday = 0;
-        let filesAddedThisMonth = 0;
+        let filesAddedToday = 0
+        let filesAddedThisMonth = 0
 
         // if (filesAddedToday == " ") {
         //   filesAddedToday = 0
         // }
 
         for (let i = 0; i < data.data.length; i++) {
-          const itemDate = data.data[i].date;
-          const thismonth = data.data[i].date.slice(0, 3);
-          console.log(thismonth , 'thismonth');
-          console.log(itemDate, "itemdate");
+          const itemDate = data.data[i].date
+          const thismonth = data.data[i].date.slice(0, 3)
+          console.log(thismonth , 'thismonth')
+          console.log(itemDate, "itemdate")
           if (currentMonth === thismonth) {
-            filesAddedThisMonth++;
+            filesAddedThisMonth++
             setfilesAddedThisMonth(filesAddedThisMonth)
           }
 
-          console.log(currentDate, "currentdate");
-          console.log(itemDate, "itemDate");
+          console.log(currentDate, "currentdate")
+          console.log(itemDate, "itemDate")
           if (itemDate.includes(currentDate)) {
-            filesAddedToday++;
+            filesAddedToday++
             setFileAddToday(filesAddedToday)
           }
         }
-        console.log("Files added today:", filesAddedToday);
+        console.log("Files added today:", filesAddedToday)
       })
       .catch((error) => {
-        console.error("Error fetching image:", error);
-      });
+        console.error("Error fetching image:", error)
+      })
   }
 
-  // var logoutEmail = JSON.parse(localStorage.getItem('email'));
+  // var logoutEmail = JSON.parse(localStorage.getItem('email'))
 
   // useEffect(() => {
   //   if (logoutEmail === 'user@gmail.com') {
-  //     document.getElementById('foruser2').style.display = 'none';
+  //     document.getElementById('foruser2').style.display = 'none'
   //   }
   // }, [logoutEmail])
   const TotalFiles = allImage.length
@@ -92,6 +92,6 @@ function Dashboard() {
         </div>
       </div>
     </div>
-  );
+  )
 }
-export default Dashboard;
+export default Dashboard

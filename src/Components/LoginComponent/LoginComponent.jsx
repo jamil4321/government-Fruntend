@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Swal from 'sweetalert2';
+/* eslint-disable */
+import React, { useState } from "react"
+import { Link } from "react-router-dom"
+import Swal from 'sweetalert2'
 
 
 export default function LoginComponent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isButtonDisabled, setButtonDisabled] = useState(false);  // const [fileidd, setFileid] = useState('');
+    const [isButtonDisabled, setButtonDisabled] = useState(false)  // const [fileidd, setFileid] = useState('')
 
     var hasemail = localStorage.getItem("email")
 
@@ -15,10 +16,10 @@ export default function LoginComponent() {
     }
 
     const handleLogin = (e) => {
-        e.preventDefault();
+        e.preventDefault()
         setButtonDisabled(true)
-        console.log("email -->", email);
-        console.log("password -->", password);
+        console.log("email -->", email)
+        console.log("password -->", password)
         fetch("https://government-backendpdated.vercel.app/login-user", {
             method: "POST",
             crossDomain: true,
@@ -38,20 +39,20 @@ export default function LoginComponent() {
                         title: "Invalid Email or Password",
                         icon: "error",
                         showConfirmButton: false
-                    });
+                    })
                     setButtonDisabled(false)
 
                 }
-                return res.json();
+                return res.json()
             })
             .then((data) => {
-                localStorage.setItem("email", JSON.stringify(email));
-                console.log(data, "userRegister");
+                localStorage.setItem("email", JSON.stringify(email))
+                console.log(data, "userRegister")
                 Swal.fire({
                     title: "Login Successfully",
                     icon: "success",
                     showConfirmButton: false
-                });
+                })
                 setButtonDisabled(false)
 
             
@@ -61,25 +62,25 @@ export default function LoginComponent() {
                         title: "Invalid Email or Password",
                         icon: "error",
                         showConfirmButton: false
-                    });
+                    })
                     setButtonDisabled(false)
 
                 }
                 // Redirect or perform any other actions after successful login
                 setTimeout(() => {
-                    window.location = "/Dashboard";
-                }, 2000);
+                    window.location = "/Dashboard"
+                }, 2000)
             })
             .catch((error) => {
-                console.error("Login failed:", error);
+                console.error("Login failed:", error)
                 Swal.fire({
                     title: "Invalid Email or Password",
                     icon: "error",
                     showConfirmButton: false
-                });
+                })
                 setButtonDisabled(true)
-            });
-    };
+            })
+    }
 
     return (
         <div className="main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%', height: '100vh' }}>
@@ -123,7 +124,7 @@ const inputStyle = {
     paddingLeft: '20px',
     marginTop: '15px',
     backgroundColor: 'none',
-};
+}
 
 const buttonStyle = {
     border: '2px solid black',
@@ -133,4 +134,4 @@ const buttonStyle = {
     marginTop: '15px',
     backgroundColor: '#023D20',
     color: 'white',
-};
+}

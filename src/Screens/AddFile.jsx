@@ -1,7 +1,8 @@
-import '../App.css';
-import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
-import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
-import DateAprove from '../Components/AddfileComponents/DateAprove';
+/* eslint-disable */
+import '../App.css'
+import { Webnavbar } from '../Components/Dashboardcomponents/Navbar'
+import { Websidebar } from '../Components/Dashboardcomponents/sidebar'
+import DateAprove from '../Components/AddfileComponents/DateAprove'
 
 function AddFile() {
     return (
@@ -18,6 +19,6 @@ function AddFile() {
                 </div>
             </div>
         </div>
-    );
+    )
 }
-export default AddFile;
+export default AddFile

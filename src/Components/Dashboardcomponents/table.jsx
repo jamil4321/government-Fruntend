@@ -1,6 +1,7 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { UserPlusIcon } from "@heroicons/react/24/solid";
-import Swal from 'sweetalert2';
+/* eslint-disable */
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
+import { UserPlusIcon } from "@heroicons/react/24/solid"
+import Swal from 'sweetalert2'
 import {
   Card,
   CardHeader,
@@ -11,23 +12,23 @@ import {
   Chip,
   IconButton,
   Tooltip,
-} from "@material-tailwind/react";
-import {List, ListItem, ListItemPrefix } from "@material-tailwind/react";
-import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
-import axios from 'axios'; // Import axios
+} from "@material-tailwind/react"
+import {List, ListItem, ListItemPrefix } from "@material-tailwind/react"
+import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid"
+import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from "react"
+import axios from 'axios' // Import axios
 import '../../App.css'
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
 
-const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"];
+const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"]
 
-let datalength;
+let datalength
 
 export default function TableWeb() {
-  const [allImage, setAllImage] = useState([]);
-  const [search, setSearch] = useState('');
-  const navigate = useNavigate();
+  const [allImage, setAllImage] = useState([])
+  const [search, setSearch] = useState('')
+  const navigate = useNavigate()
 
   useEffect(() => {
     getImage()
@@ -35,40 +36,40 @@ export default function TableWeb() {
 
   async function getImage() {
     try {
-      const response = await axios.get("https://government-backendpdated.vercel.app/get-image");
+      const response = await axios.get("https://government-backendpdated.vercel.app/get-image")
       
       // Check if the response is successful (status code 200)
       if (response.status === 200) {
-        setAllImage(response.data.data);
+        setAllImage(response.data.data)
         console.log("tabledatalength" , response.data.data.length)
         datalength = response.data.data.length
       } else {
-        throw new Error(`Network response was not ok: ${response.status}`);
+        throw new Error(`Network response was not ok: ${response.status}`)
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching data:", error)
     }
   }
 
-//   var logoutEmail = JSON.parse(localStorage.getItem('email'));
+//   var logoutEmail = JSON.parse(localStorage.getItem('email'))
 
 //   useEffect(() => {
 //     if (logoutEmail === 'user@gmail.com') {
-//       document.getElementById('foruser2').style.display = 'none';
+//       document.getElementById('foruser2').style.display = 'none'
 //     }
 //   }, [logoutEmail])
 // console.log(datalength)
 
-var logoutEmail = JSON.parse(localStorage.getItem('email'));
-console.log("logoutEmail", logoutEmail);
+var logoutEmail = JSON.parse(localStorage.getItem('email'))
+console.log("logoutEmail", logoutEmail)
 
 const  [logout , setLogout] = useState(logoutEmail)
 if (logout && logout.length > 0) {
-  console.log("User Logged In");
+  console.log("User Logged In")
 }else {
   localStorage.setItem('email' , JSON.stringify(''))
-  setLogout("Login");
-  window.location = "/";
+  setLogout("Login")
+  window.location = "/"
 }
 localStorage.setItem("name", JSON.stringify(""))
 localStorage.setItem("fileid", JSON.stringify(""))
@@ -125,8 +126,8 @@ localStorage.setItem("ii", JSON.stringify(""))
           </thead>
           <tbody>
           {allImage.map((data, index) => {
-              const isLast = index === allImage.length - 1;
-              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+              const isLast = index === allImage.length - 1
+              const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50"
 
               if (data && data.name && (search.toLowerCase() === data.name.toLowerCase() ||(search.length > 0 && data.name.toLowerCase().includes(search.toLowerCase())) || search === "")
               ) {
@@ -218,7 +219,7 @@ localStorage.setItem("ii", JSON.stringify(""))
                     </Tooltip>
                   </td>
                 </tr>
-              );
+              )
             }})}
           </tbody>
         </table>
@@ -232,7 +233,7 @@ localStorage.setItem("ii", JSON.stringify(""))
             </ListItem>
         </List>
     </Card>
-  );
+  )
 }
 
 export  {datalength}

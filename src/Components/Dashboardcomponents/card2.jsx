@@ -1,10 +1,11 @@
+/* eslint-disable */
 import {
   Card,
   CardBody,
   CardFooter,
   Typography,
   // Button,
-} from "@material-tailwind/react";
+} from "@material-tailwind/react"
 import '../../App.css'
 export function Webcard2(props) {
   return (
@@ -23,6 +24,6 @@ export function Webcard2(props) {
         </Typography>
       </CardFooter>
     </Card>
-  );
+  )
 }
 

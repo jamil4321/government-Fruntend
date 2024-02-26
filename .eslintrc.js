@@ -1,11 +1,12 @@
 module.exports = {
   env: {
     browser: true,
-    es2021: true
+    es2021: true,
+    node: true
   },
   extends: [
     'standard',
-    'plugin:react/recommended'
+    'plugin:react/all'
   ],
   overrides: [
     {
@@ -13,7 +14,7 @@ module.exports = {
         node: true
       },
       files: [
-        '.eslintrc.{js,cjs}'
+        '.eslintrc.{js,cjs,jsx}'
       ],
       parserOptions: {
         sourceType: 'script'
@@ -28,5 +29,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-vars': 'error'
   }
 }
