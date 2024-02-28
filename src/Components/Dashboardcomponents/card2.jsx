@@ -1,4 +1,3 @@
-/* eslint-disable */
 import {
   Card,
   CardBody,
@@ -9,7 +8,7 @@ import {
 import '../../App.css'
 export function Webcard2(props) {
   return (
-    <Card className="mt-6 bg-white" id="card2" style={{ backgroundColor: props.color, color: props.text, display: "flex", justifyContent: 'center', width: '290px', marginLeft: '20px' }} >
+    <Card className="mt-6 bg-white reponsivecard" id="card2" style={{ backgroundColor: props.color, color: props.text, display: "flex", justifyContent: 'center', width: '290px', marginLeft: '20px' }} >
       <CardBody>
         <Typography variant="h6" color="blue-gray" className="mb-2 text-#56613F" >
           {props.heading1}
