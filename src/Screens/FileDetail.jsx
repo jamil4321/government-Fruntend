@@ -1,4 +1,3 @@
-/* eslint-disable */
 import '../App.css';
 import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
 import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
