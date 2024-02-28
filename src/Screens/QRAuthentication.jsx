@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import QrDetailComponent from "../Components/QRDetailComponent/QrDetailComponent";
 
