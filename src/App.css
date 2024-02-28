@@ -54,6 +54,12 @@ body {
   }
 }
 
+@media screen and (max-width: 2000px) {
+.responsivebtn{
+  margin-left: 270px;
+}
+
+}
 @media screen and (max-width: 1600px) {
   #card1 {
     width: 340px;
@@ -81,7 +87,14 @@ body {
     padding-right: 10px;
   }
 }
-
+@media (max-width: 1400px) {
+  #card1 {
+    width: 270px !important;
+  }
+  #card2 {
+    width: 270px !important;
+  }
+}
 @media screen and (max-width: 1354px) {
   #card1 {
     width: 300px;
@@ -97,7 +110,14 @@ body {
     /* margin-right:-100px; */
   }
 }
-
+@media (max-width: 1321px) {
+  #card1 {
+    width: 250px !important;
+  }
+  #card2 {
+    width: 250px !important;
+  }
+}
 @media screen and (max-width: 1318px) {
   #card1 {
     width: 280px;
@@ -129,7 +149,14 @@ body {
     /* margin-right:-100px; */
   }
 }
-
+@media (max-width: 1246px) {
+  #card1 {
+    width: 210px !important;
+  }
+  #card2 {
+    width: 210px !important;
+  }
+}
 @media screen and (max-width: 1236px) {
   #card1 {
     width: 260px;
@@ -151,8 +178,9 @@ body {
 }
 
 @media screen and (max-width: 1186px) {
+  
   #card1 {
-    width: 375px;
+    width: 475px;
     height: 200px;
     margin-left: 25px;
   }
@@ -164,7 +192,7 @@ body {
   }
 
   #card2 {
-    width: 375px;
+    width: 475px;
     height: 200px;
     margin-left: 25px;
   }
@@ -207,6 +235,16 @@ body {
     flex-direction: column;
   }
 
+  .AddFileResponsive{
+    padding-top: 150px;
+    padding-right: 200px;
+  }
+  #card1 {
+    width: 290px !important;
+  }
+  #card2 {
+    width: 290px !important;
+  }
 }
 
 @media screen and (max-width: 1154px) {
@@ -216,6 +254,9 @@ body {
 
   #card2 {
     width: 350px;
+  }
+  .responsivebtn{
+    margin-right: 67px;
   }
 
   .divv {
@@ -266,19 +307,81 @@ body {
     /* margin-right:-100px; */
   }
 }
-
-@media screen and (max-width: 960px) {
-  #inpresponsive {
-    width: 247px;
+@media screen and (max-width: 1050px) {
+  #card1 {
+    width: 250px !important;
+  }
+  #card2 {
+    width: 250px !important;
   }
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 961px) {
+  .responsivebtn{
+    margin-right: -1px;
+  }
+  #opt{
+    width: 247px !important;
+  }
+  .AddFileResponsive{
+   padding: 0%;
+   margin-top: 13%;
+  }
+  .responsivebtn{
+    margin-left:0px;
+  }
+  #inpresponsive {
+    width: 247px;
+  }
+  #datainpresponsive{
+    width: 247px;
+  }
+}
+@media (max-width: 931px) {
+  #card1 {
+    width: 220px !important;
+  }
+  #card2 {
+    width: 220px !important;
+  }
+}
+@media (max-width: 850px) {
+  #card1 {
+    width: 200px !important;
+  }
+  #card2 {
+    width: 200px !important;
+  }
+  .AddFileResponsive{
+    padding: 0%;
+    margin-top: 18%;
+   }
+}
+
+@media (max-width: 807px) {
+ .responsiveuploadfile{
+  max-width: 700px;
+ }
+}
+
+@media (max-width: 784px) {
+  #card1 {
+    width: 190px !important;
+  }
+  #card2 {
+    width: 180px !important;
+  }
+}
+@media (max-width: 601px) {
   .swal2-popup {
     width: 100%;
     max-width: 100%;
     margin: 0;
   }
+  .AddFileResponsive{
+    padding: 0%;
+    margin-top: 24%;
+   }
 
   .responsive-sweetalert {
     width: 100%;
@@ -290,6 +393,11 @@ body {
   }
 }
 
+@media screen and (max-width: 540px) {
+  #categoryresponsive{
+    margin-top: 70px;
+  }
+}
 @media screen and (max-width: 500px) {
   .Detailresponsive {
     min-width: 100%;
@@ -309,13 +417,22 @@ body {
   .statusResponsive {
     margin-left: -30px;
   }
+  #card1 {
+    width: 350px !important;
+  }
+  #card2 {
+    width: 350px !important;
+  }
 }
 
 @media screen and (max-width: 451px) {
   .navbarpara {
     font-size: 17px;
   }
-
+  .AddFileResponsive{
+    padding: 0%;
+    margin-top: 33%;
+   }
   .navbarspan {
     font-size: 11px;
   }
@@ -371,11 +488,11 @@ body {
   .navbarpara {
     font-size: 15px;
   }
-
+  
   .navbarspan {
     font-size: 10px;
   }
-
+  
   #navbaricon {
     margin-right: -25px;
   }
@@ -389,4 +506,10 @@ body {
 
 .imgqr {
   margin-left: 102px;
+}
+@media screen and (max-width: 325px) {
+  .AddFileResponsive{
+    padding: 0%;
+    margin-top: 43%;
+   }
 }
