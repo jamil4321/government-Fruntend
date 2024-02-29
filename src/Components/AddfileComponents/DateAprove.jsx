@@ -366,8 +366,8 @@ export default function DateAprove() {
     return formattedDate;
   };
 
-  const newDate = formatDate2();
-
+  const newDate = formatDate2()
+  
   return (
     <form
       action="https://government-backendpdated.vercel.app/upload-image"
