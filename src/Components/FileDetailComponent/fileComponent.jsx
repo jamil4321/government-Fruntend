@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import '../../App.css';
 import { useState, useEffect } from "react";
@@ -101,7 +100,7 @@ export default function FileDetailComponent() {
       </div>
 
       <div className="mt-8">
-        <h1 className="text-3xl font-bold mb-4" style={{ textAlign: 'center' }}>File Name : <b style={{ color: 'green' }}> {localStorageName} </b></h1>
+        <h1 className="text-3xl font-bold mb-4" style={{ textAlign: 'center' }}><b style={{ color: 'green' , fontSize:'25px' }}> {localStorageName} </b></h1>
 
         <img
           className="w-full max-w-3xl mx-auto border border-green-500"
