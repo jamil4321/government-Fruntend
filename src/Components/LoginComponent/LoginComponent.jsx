@@ -126,7 +126,7 @@ const inputStyle = {
     borderRadius: '30px',
     paddingLeft: '20px',
     marginTop: '15px',
-    backgroundColor: 'none',
+    backgroundColor: 'none'
 };
 
 const buttonStyle = {
@@ -136,5 +136,5 @@ const buttonStyle = {
     borderRadius: '30px',
     marginTop: '15px',
     backgroundColor: '#023D20',
-    color: 'white',
+    color: 'white'
 };
