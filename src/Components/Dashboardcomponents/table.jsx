@@ -91,7 +91,7 @@ export default function TableWeb() {
   localStorage.setItem("image3", JSON.stringify(""));
   localStorage.setItem("QrCode", JSON.stringify(""));
   localStorage.setItem("iii", JSON.stringify(""));
-  localStorage.setItem("ii", JSON.stringify(""));
+  localStorage.setItem("ii", JSON.stringify(""))
 
   return (
     <Card className="h-full w-full" id="cardresponsive">
