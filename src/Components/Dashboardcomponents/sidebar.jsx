@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import { Card, List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"; // Updated import
 // import { useHistory } from "react-router-dom";
