@@ -322,14 +322,14 @@ export default function DateAprove() {
             setUploadbutton("");
             setGraybutton("open");
 
-            // setTimeout(() => {
-            //   window.location = "/Dashboard";
-            //   setTimeout(() => {
-            //     setUploadbutton("open");
-            //     setGraybutton("");
-            //     setButtonDisabled(true);
-            //   }, 2000);
-            // }, 7000);
+            setTimeout(() => {
+              window.location = "/Dashboard";
+              setTimeout(() => {
+                setUploadbutton("open");
+                setGraybutton("");
+                setButtonDisabled(true);
+              }, 2000);
+            }, 7000);
           }
 
           // ... rest of your code for handling the response
