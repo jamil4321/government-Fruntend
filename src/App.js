@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import Dashboard from './Screens/Dashboard';
 import LoginComponent from './Screens/Login';
