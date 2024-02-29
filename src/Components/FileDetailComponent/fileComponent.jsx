@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from "react";
 import '../../App.css';
 import { useState, useEffect } from "react";
@@ -123,7 +122,7 @@ export default function FileDetailComponent() {
                   <Viewer fileUrl={data.image} />
                 </Worker>
                 <br />
-                <a href={data.image} download={`${data.name}_pdf1.png`}>
+                <a href={data.image} download={`${data.name}_pdf1.pdf`}>
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
@@ -145,7 +144,7 @@ export default function FileDetailComponent() {
                   <Viewer fileUrl={data.image2} pageNumber={1} />
                 </Worker>
                 <br />
-                <a href={data.image2} download={`${data.name}_pdf1.png`}>
+                <a href={data.image2} download={`${data.name}_pdf1.pdf`}>
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
@@ -165,7 +164,7 @@ export default function FileDetailComponent() {
                   <Viewer fileUrl={data.image3} />
                 </Worker>
                 <br />
-                <a href={data.image3} download={`${data.name}_pdf1.png`}>
+                <a href={data.image3} download={`${data.name}_pdf1.pdf`}>
                   <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
                 </a>
               </div>
