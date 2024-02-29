@@ -35,7 +35,7 @@ export default function LoginComponent() {
             .then((res) => {
                 if (!res.ok) {
                     Swal.fire({
-                        title: "Invalid Email or Password",
+                        title: "Server Error",
                         icon: "error",
                         showConfirmButton: false
                     });
@@ -58,7 +58,7 @@ export default function LoginComponent() {
 
                 if (!data) {
                     Swal.fire({
-                        title: "Invalid Email or Password",
+                        title: "no data",
                         icon: "error",
                         showConfirmButton: false
                     });
@@ -75,7 +75,11 @@ export default function LoginComponent() {
                 Swal.fire({
                     title: "Invalid Email or Password",
                     icon: "error",
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    timer: 2000, // Set the timer to 2 seconds
+                    onClose: () => {
+                        setButtonDisabled(false);
+                    }
                 });
                 setButtonDisabled(false)
             });
