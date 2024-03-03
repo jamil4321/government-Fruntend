@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState ,useContext} from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Swal from 'sweetalert2';
 import { UserContext } from "../../context";
 import { useNavigate } from "react-router-dom";
@@ -8,15 +8,17 @@ import { useNavigate } from "react-router-dom";
 export default function LoginComponent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isButtonDisabled, setButtonDisabled] = useState(false); 
-    const {login} = useContext(UserContext)  
+    const [isButtonDisabled, setButtonDisabled] = useState(false);
+    const { login, user } = useContext(UserContext)
     const navigate = useNavigate()
 
-
+    useEffect(() => {
+        if (user) navigate('/dashboard')
+    }, [user])
     const handleLogin = (e) => {
         e.preventDefault();
         setButtonDisabled(true)
-        fetch("https://government-backendpdated.vercel.app/login-user", {
+        fetch("https://government-backend-production.up.railway.app/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -36,6 +38,7 @@ export default function LoginComponent() {
                 return res.json();
             })
             .then((data) => {
+                console.log(data,"data from user")
                 login(data.user)
                 Swal.fire({
                     title: "Login Successfully",
@@ -43,7 +46,7 @@ export default function LoginComponent() {
                     showConfirmButton: false
                 });
                 setButtonDisabled(false)
-                navigate( "/Dashboard")
+                // navigate("/dashboard")
             })
             .catch((error) => {
                 console.error("Login failed:", error);

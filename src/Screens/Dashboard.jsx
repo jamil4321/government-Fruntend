@@ -18,7 +18,7 @@ function Dashboard() {
   }, [])
 
   function getImage() {
-    fetch("https://government-backendpdated.vercel.app/get-image", {
+    fetch("https://government-backend-production.up.railway.app/get-image", {
       method: "GET",
     })
       .then((res) => res.json())

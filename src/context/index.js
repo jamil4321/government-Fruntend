@@ -7,22 +7,24 @@ export const UserContext = createContext()
 
 
 const UserProvider = ({ children }) => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(null);
     useLayoutEffect(() => {
         const data = localStorage.getItem('user')
-
         if (data) {
             const storedState = CryptoJS.AES.decrypt(data, 'secret key 123');;
-            setUser(JSON.parse(storedState.toString(CryptoJS.enc.Utf8)));
+            console.log(storedState.toString(CryptoJS.enc.Utf8),"user from useEffect")
+            if(typeof storedState.toString(CryptoJS.enc.Utf8) === 'object'){
+                setUser(JSON.parse(storedState.toString(CryptoJS.enc.Utf8)));
+            }
         }
     }, []);
     useEffect(() => {
-        if (user) {
-            let cypher = CryptoJS.AES.encrypt(JSON.stringify(user), 'secret key 123').toString();
+        console.log(user,"user begning")
+            let cypher = CryptoJS.AES.encrypt(user ? JSON.stringify(user) :user, 'secret key 123').toString();
             localStorage.setItem('user', cypher);
-        }
     }, [user]);
     const login = (user) => {
+        console.log(user,"user")
         setUser(user);
     };
     const logout = () => {

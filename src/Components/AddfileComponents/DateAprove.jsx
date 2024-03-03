@@ -34,7 +34,7 @@ export default function DateAprove() {
   let uniqueId;
 
   async function getImageData() {
-    fetch("https://government-backendpdated.vercel.app/get-image-count", {
+    fetch("https://government-backend-production.up.railway.app/get-image-count", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -199,7 +199,7 @@ export default function DateAprove() {
       if (image.length > 0 || ii.length > 0 || iii.length > 0) {
         try {
           const response = await fetch(
-            "https://government-backendpdated.vercel.app/upload-image",
+            "https://government-backend-production.up.railway.app/upload-image",
             {
               method: "POST",
               crossDomain: true,
@@ -331,7 +331,7 @@ export default function DateAprove() {
   
   return (
     <form
-      action="https://government-backendpdated.vercel.app/upload-image"
+      action="https://government-backend-production.up.railway.app/upload-image"
       method="POST"
       encType="multipart/form-data"
     >
