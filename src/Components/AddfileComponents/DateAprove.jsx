@@ -1,12 +1,10 @@
 /* eslint-disable */
-import React from "react";
+import React,{useContext} from "react";
 import "../../App.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Swal from "sweetalert2";
 import QRCode from "qrcode";
-import { Document } from "react-pdf";
-let uniqueId;
+import { UserContext } from "../../context";
 
 var alldatalength;
 
@@ -31,14 +29,12 @@ export default function DateAprove() {
   const [isButtonDisabled, setButtonDisabled] = useState(false); // const [fileidd, setFileid] = useState('');
   const [uploadbutton, setUploadbutton] = useState("open");
   const [graybutton, setGraybutton] = useState("");
-
-  var email = JSON.parse(localStorage.getItem("email"));
-  localStorage.setItem("email", JSON.stringify(email));
+  const {user} = useContext(UserContext)
 
   let uniqueId;
 
   async function getImageData() {
-    fetch("https://government-backendpdated.vercel.app/get-image", {
+    fetch("http://localhost:5000/get-image", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -150,20 +146,6 @@ export default function DateAprove() {
       console.log("Error: ", error);
     };
   };
-  //   setTimeout(() => {
-  //   localStorage.setItem("name", JSON.stringify(""))
-  //   localStorage.setItem("fileid", JSON.stringify(""))
-  //   localStorage.setItem("select", JSON.stringify(""))
-  //   localStorage.setItem("image", JSON.stringify(""))
-  //   localStorage.setItem("date", JSON.stringify(""))
-  //   localStorage.setItem("location", JSON.stringify(""))
-  //   localStorage.setItem("Qrcode", JSON.stringify(""))
-  //   localStorage.setItem("image2", JSON.stringify(""))
-  //   localStorage.setItem("image3", JSON.stringify(""))
-  //   localStorage.setItem("QrCode", JSON.stringify(""))
-  //   localStorage.setItem("iii", JSON.stringify(""))
-  //   localStorage.setItem("ii", JSON.stringify(""))
-  // }, 10000);
 
   const formatDate = () => {
     const options = {
@@ -183,12 +165,6 @@ export default function DateAprove() {
 
   const date = formatDate();
 
-  useEffect(() => {
-    // getImage()
-  }, []);
-
-  var logoutEmail = JSON.parse(localStorage.getItem("email"));
-  console.log("logoutEmail", logoutEmail);
 
   async function uploadImage(e) {
     e.preventDefault();
@@ -210,21 +186,7 @@ export default function DateAprove() {
       setButtonDisabled(true);
     }
 
-    // localStorage.setItem("QrDetailName", JSON.stringify(name));
-
     var location = "";
-
-    if (logoutEmail === "user@gmail.com") {
-      location = "Karachi camp office";
-    } else if (logoutEmail === "user2@gmail.com") {
-      location = "hyderabad head office";
-    } else if (logoutEmail === "admin@gmail.com") {
-      location = "Admin";
-    } else {
-      console.log("Invalid email");
-      return;
-    }
-
     localStorage.setItem("image", JSON.stringify(image));
     localStorage.setItem("ii", img);
     localStorage.setItem("iii", img3);
@@ -232,13 +194,11 @@ export default function DateAprove() {
     const QrGet = localStorage.getItem("QrCode");
     const ii = localStorage.getItem("ii");
     const iii = localStorage.getItem("iii");
-    // const image3 = localStorage.getItem("image3");
-    // if(name && select && password){
     if (name.length > 0 && password.length > 0 && select.length > 0) {
       if (image.length > 0 || ii.length > 0 || iii.length > 0) {
         try {
           const response = await fetch(
-            "https://government-backendpdated.vercel.app/upload-image",
+            "http://localhost:5000/upload-image",
             {
               method: "POST",
               crossDomain: true,
@@ -255,7 +215,7 @@ export default function DateAprove() {
                 password,
                 fileid: incrementalldetaildata,
                 date,
-                location,
+                location:user.location,
                 QrGet,
                 uniqueId,
                 ii,
@@ -370,7 +330,7 @@ export default function DateAprove() {
   
   return (
     <form
-      action="https://government-backendpdated.vercel.app/upload-image"
+      action="http://localhost:5000/upload-image"
       method="POST"
       encType="multipart/form-data"
     >

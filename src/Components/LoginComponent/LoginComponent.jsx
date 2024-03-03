@@ -1,26 +1,22 @@
 /* eslint-disable */
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState ,useContext} from "react";
 import Swal from 'sweetalert2';
+import { UserContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
 
 export default function LoginComponent() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isButtonDisabled, setButtonDisabled] = useState(false);  // const [fileidd, setFileid] = useState('');
+    const [isButtonDisabled, setButtonDisabled] = useState(false); 
+    const {login} = useContext(UserContext)  
+    const navigate = useNavigate()
 
-    var hasemail = JSON.parse(localStorage.getItem("email"));
-
-    if (hasemail && hasemail.length > 0) {
-        window.location = '/Dashboard';
-    }
 
     const handleLogin = (e) => {
         e.preventDefault();
         setButtonDisabled(true)
-        console.log("email -->", email);
-        console.log("password -->", password);
-        fetch("https://government-backendpdated.vercel.app/login-user", {
+        fetch("http://localhost:5000/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {
@@ -35,41 +31,19 @@ export default function LoginComponent() {
         })
             .then((res) => {
                 if (!res.ok) {
-                    Swal.fire({
-                        title: "Server Error",
-                        icon: "error",
-                        showConfirmButton: false
-                    });
-                    setButtonDisabled(false)
-
+                    throw new Error("")
                 }
                 return res.json();
             })
             .then((data) => {
-                localStorage.setItem("email", JSON.stringify(email));
-                console.log(data, "userRegister");
+                login(data.user)
                 Swal.fire({
                     title: "Login Successfully",
                     icon: "success",
                     showConfirmButton: false
                 });
                 setButtonDisabled(false)
-
-            
-
-                if (!data) {
-                    Swal.fire({
-                        title: "no data",
-                        icon: "error",
-                        showConfirmButton: false
-                    });
-                    setButtonDisabled(false)
-
-                }
-                // Redirect or perform any other actions after successful login
-                setTimeout(() => {
-                    window.location = "/Dashboard";
-                }, 4000);
+                navigate( "/Dashboard")
             })
             .catch((error) => {
                 console.error("Login failed:", error);
@@ -108,7 +82,7 @@ export default function LoginComponent() {
                             style={{ ...inputStyle, marginTop: '15px', width: '100%' }}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button style={buttonStyle} disabled={isButtonDisabled}> 
+                        <button style={buttonStyle} disabled={isButtonDisabled}>
                             {isButtonDisabled ? "Logining..." : "Login"}
                         </button>
                     </form>

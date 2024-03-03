@@ -4,11 +4,7 @@ import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
 import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
 import { Webcard2 } from '../Components/Dashboardcomponents/card2';
 import TableWeb from '../Components/Dashboardcomponents/table';
-import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import axios from 'axios'; // Import axios
-
-const TABLE_HEAD = ["FILE ID", "FILE NAME", "STATUS", "CATEGORY", "CREATION DATE", "VIEW FILE"];
 
 
 function Dashboard() {
@@ -16,14 +12,13 @@ function Dashboard() {
   const [search, setSearch] = useState('');
   const [FileAddToday, setFileAddToday] = useState('0');
   const [filesAddedThisMonth, setfilesAddedThisMonth] = useState('0')
-  const navigate = useNavigate();
 
   useEffect(() => {
     getImage()
   }, [])
 
   function getImage() {
-    fetch("https://government-backendpdated.vercel.app/get-image", {
+    fetch("http://localhost:5000/get-image", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -34,10 +29,6 @@ function Dashboard() {
         console.log(currentMonth , 'currentMonth')
         let filesAddedToday = 0;
         let filesAddedThisMonth = 0;
-
-        // if (filesAddedToday == " ") {
-        //   filesAddedToday = 0
-        // }
 
         for (let i = 0; i < data.data.length; i++) {
           const itemDate = data.data[i].date;
@@ -62,14 +53,6 @@ function Dashboard() {
         console.error("Error fetching image:", error);
       });
   }
-
-  // var logoutEmail = JSON.parse(localStorage.getItem('email'));
-
-  // useEffect(() => {
-  //   if (logoutEmail === 'user@gmail.com') {
-  //     document.getElementById('foruser2').style.display = 'none';
-  //   }
-  // }, [logoutEmail])
   const TotalFiles = allImage.length
 
 

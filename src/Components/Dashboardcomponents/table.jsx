@@ -16,10 +16,11 @@ import {
 import { List, ListItem, ListItemPrefix } from "@material-tailwind/react";
 import { InboxIcon, Cog6ToothIcon, PowerIcon } from "@heroicons/react/24/solid";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios"; // Import axios
 import "../../App.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context";
 
 const TABLE_HEAD = [
   "FILE ID",
@@ -35,6 +36,7 @@ let datalength;
 export default function TableWeb() {
   const [allImage, setAllImage] = useState([]);
   const [search, setSearch] = useState("");
+  const {logout} = useContext(UserContext)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function TableWeb() {
   async function getImage() {
     try {
       const response = await axios.get(
-        "https://government-backendpdated.vercel.app/get-image"
+        "http://localhost:5000/get-image"
       );
 
       // Check if the response is successful (status code 200)
@@ -59,39 +61,18 @@ export default function TableWeb() {
       console.error("Error fetching data:", error);
     }
   }
-
-  //   var logoutEmail = JSON.parse(localStorage.getItem('email'));
-
-  //   useEffect(() => {
-  //     if (logoutEmail === 'user@gmail.com') {
-  //       document.getElementById('foruser2').style.display = 'none';
-  //     }
-  //   }, [logoutEmail])
-  // console.log(datalength)
-
-  var logoutEmail = JSON.parse(localStorage.getItem("email"));
-  console.log("logoutEmail", logoutEmail);
-
-  const [logout, setLogout] = useState(logoutEmail);
-  if (logout && logout.length > 0) {
-    console.log("User Logged In");
-  } else {
-    localStorage.setItem("email", JSON.stringify(""));
-    setLogout("Login");
-    window.location = "/";
-  }
-  localStorage.setItem("name", JSON.stringify(""));
-  localStorage.setItem("fileid", JSON.stringify(""));
-  localStorage.setItem("select", JSON.stringify(""));
-  localStorage.setItem("image", JSON.stringify(""));
-  localStorage.setItem("date", JSON.stringify(""));
-  localStorage.setItem("location", JSON.stringify(""));
-  localStorage.setItem("Qrcode", JSON.stringify(""));
-  localStorage.setItem("image2", JSON.stringify(""));
-  localStorage.setItem("image3", JSON.stringify(""));
-  localStorage.setItem("QrCode", JSON.stringify(""));
-  localStorage.setItem("iii", JSON.stringify(""));
-  localStorage.setItem("ii", JSON.stringify(""))
+  // localStorage.setItem("name", JSON.stringify(""));
+  // localStorage.setItem("fileid", JSON.stringify(""));
+  // localStorage.setItem("select", JSON.stringify(""));
+  // localStorage.setItem("image", JSON.stringify(""));
+  // localStorage.setItem("date", JSON.stringify(""));
+  // localStorage.setItem("location", JSON.stringify(""));
+  // localStorage.setItem("Qrcode", JSON.stringify(""));
+  // localStorage.setItem("image2", JSON.stringify(""));
+  // localStorage.setItem("image3", JSON.stringify(""));
+  // localStorage.setItem("QrCode", JSON.stringify(""));
+  // localStorage.setItem("iii", JSON.stringify(""));
+  // localStorage.setItem("ii", JSON.stringify(""))
 
   return (
     <Card className="h-full w-full" id="cardresponsive">
@@ -232,43 +213,43 @@ export default function TableWeb() {
                             <Button
                               style={{ marginLeft: "20px" }}
                               onClick={() => {
-                                localStorage.setItem(
-                                  "name",
-                                  JSON.stringify(data.name)
-                                );
-                                localStorage.setItem(
-                                  "fileid",
-                                  JSON.stringify(data.fileid)
-                                );
-                                localStorage.setItem(
-                                  "select",
-                                  JSON.stringify(data.select)
-                                );
-                                localStorage.setItem(
-                                  "image",
-                                  JSON.stringify(data.image)
-                                );
-                                localStorage.setItem(
-                                  "date",
-                                  JSON.stringify(data.date)
-                                );
-                                localStorage.setItem(
-                                  "location",
-                                  JSON.stringify(data.location)
-                                );
-                                localStorage.setItem(
-                                  "Qrcode",
-                                  JSON.stringify(data.QrGet)
-                                );
-                                localStorage.setItem(
-                                  "image2",
-                                  JSON.stringify(data.image2)
-                                );
-                                localStorage.setItem(
-                                  "image3",
-                                  JSON.stringify(data.image3)
-                                );
-                                window.location = "/FileView";
+                                // localStorage.setItem(
+                                //   "name",
+                                //   JSON.stringify(data.name)
+                                // );
+                                // localStorage.setItem(
+                                //   "fileid",
+                                //   JSON.stringify(data.fileid)
+                                // );
+                                // localStorage.setItem(
+                                //   "select",
+                                //   JSON.stringify(data.select)
+                                // );
+                                // localStorage.setItem(
+                                //   "image",
+                                //   JSON.stringify(data.image)
+                                // );
+                                // localStorage.setItem(
+                                //   "date",
+                                //   JSON.stringify(data.date)
+                                // );
+                                // localStorage.setItem(
+                                //   "location",
+                                //   JSON.stringify(data.location)
+                                // );
+                                // localStorage.setItem(
+                                //   "Qrcode",
+                                //   JSON.stringify(data.QrGet)
+                                // );
+                                // localStorage.setItem(
+                                //   "image2",
+                                //   JSON.stringify(data.image2)
+                                // );
+                                // localStorage.setItem(
+                                //   "image3",
+                                //   JSON.stringify(data.image3)
+                                // );
+                                navigate( `/FileView/${data.fileid}`);
                               }}
                               className="flex items-center gap-3"
                               size="sm"
@@ -289,9 +270,7 @@ export default function TableWeb() {
       <List>
         <ListItem
           className="mobilelogoutbutton"
-          onClick={(e) => {
-            setLogout(e.target.value);
-          }}
+          onClick={logout}
         >
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />

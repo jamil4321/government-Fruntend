@@ -13,7 +13,7 @@ function FileDetail() {
                 <div id="sidebarVanish" style={{ backgroundColor: 'white', marginTop: '155px', width: '25%' }} >
                     <Websidebar Afile="/AddFile" Dboard="/Dashboard" />
                 </div>
-                <div className='cardresponsiveback  flex justify-center ' style={{ paddingTop: '130px', width: '75%' }} >
+                <div className='cardresponsiveback  flex justify-center ' style={{ padding: 100, width: '75%' }} >
 
                     <FileDetailComponent />
 
