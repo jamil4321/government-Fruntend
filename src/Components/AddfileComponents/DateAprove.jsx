@@ -34,22 +34,23 @@ export default function DateAprove() {
   let uniqueId;
 
   async function getImageData() {
-    fetch("http://localhost:5000/get-image", {
+    fetch("https://government-backendpdated.vercel.app/get-image-count", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log("data", data);
         Setgetallimages(data.data);
-        console.log("data", data.data);
+    
       });
   }
   useEffect(() => {
     getImageData();
-  });
-  alldatalength = getimages.length;
-  var concatid = alldatalength + 1;
-  var num = "00";
-  var incrementalldetaildata = num.concat(concatid);
+  },[]);
+  alldatalength = getimages;
+  let concatid = alldatalength + 1;
+  let num = "00";
+  let incrementalldetaildata = num.concat(concatid);
   // setFileid(incrementalldetaildata)
 
   useEffect(() => {
@@ -198,7 +199,7 @@ export default function DateAprove() {
       if (image.length > 0 || ii.length > 0 || iii.length > 0) {
         try {
           const response = await fetch(
-            "http://localhost:5000/upload-image",
+            "https://government-backendpdated.vercel.app/upload-image",
             {
               method: "POST",
               crossDomain: true,
@@ -330,7 +331,7 @@ export default function DateAprove() {
   
   return (
     <form
-      action="http://localhost:5000/upload-image"
+      action="https://government-backendpdated.vercel.app/upload-image"
       method="POST"
       encType="multipart/form-data"
     >

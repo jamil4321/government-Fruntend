@@ -52,7 +52,7 @@ export default function FileDetailComponent() {
   function getImage() {
     // console.log("localStorageFileid", localStorageFileid, params)
     setLoading(true)
-    fetch(`http://localhost:5000/get-image/${params.id}`, {
+    fetch(`https://government-backendpdated.vercel.app/get-image/${params.id}`, {
       method: "GET",
     }).then((res) => {
       if(!res.ok) throw new Error("")

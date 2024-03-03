@@ -16,7 +16,7 @@ export default function LoginComponent() {
     const handleLogin = (e) => {
         e.preventDefault();
         setButtonDisabled(true)
-        fetch("http://localhost:5000/login-user", {
+        fetch("https://government-backendpdated.vercel.app/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {

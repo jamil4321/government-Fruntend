@@ -17,7 +17,7 @@ export default function QrDetailComponent() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/get-image/find_by_qr/${id}`, {
+    fetch(`https://government-backendpdated.vercel.app/get-image/find_by_qr/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())

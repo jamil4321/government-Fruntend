@@ -46,7 +46,7 @@ export default function TableWeb() {
   async function getImage() {
     try {
       const response = await axios.get(
-        "http://localhost:5000/get-image"
+        "https://government-backendpdated.vercel.app/get-image"
       );
 
       // Check if the response is successful (status code 200)
