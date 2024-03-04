@@ -43,7 +43,8 @@ export default function LoginComponent() {
                 Swal.fire({
                     title: "Login Successfully",
                     icon: "success",
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    timer: 2000, // Set the timer to 2 seconds
                 });
                 setButtonDisabled(false)
                 // navigate("/dashboard")
