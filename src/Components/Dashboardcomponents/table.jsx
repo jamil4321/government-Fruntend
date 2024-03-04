@@ -33,34 +33,34 @@ const TABLE_HEAD = [
 
 let datalength;
 
-export default function TableWeb() {
-  const [allImage, setAllImage] = useState([]);
+export default function TableWeb({allImage}) {
+  // const [allImage, setAllImage] = useState([]);
   const [search, setSearch] = useState("");
   const {logout} = useContext(UserContext)
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getImage();
-  }, []);
+  // useEffect(() => {
+  //   getImage();
+  // }, []);
 
-  async function getImage() {
-    try {
-      const response = await axios.get(
-        "https://government-backend-production.up.railway.app/get-image"
-      );
+  // async function getImage() {
+  //   try {
+  //     const response = await axios.get(
+  //       "https://government-backend-production.up.railway.app/get-image"
+  //     );
 
-      // Check if the response is successful (status code 200)
-      if (response.status === 200) {
-        setAllImage(response.data.data);
-        console.log("tabledatalength", response.data.data.length);
-        datalength = response.data.data.length;
-      } else {
-        throw new Error(`Network response was not ok: ${response.status}`);
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
+  //     // Check if the response is successful (status code 200)
+  //     if (response.status === 200) {
+  //       setAllImage(response.data.data);
+  //       console.log("tabledatalength", response.data.data.length);
+  //       datalength = response.data.data.length;
+  //     } else {
+  //       throw new Error(`Network response was not ok: ${response.status}`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // }
   // localStorage.setItem("name", JSON.stringify(""));
   // localStorage.setItem("fileid", JSON.stringify(""));
   // localStorage.setItem("select", JSON.stringify(""));

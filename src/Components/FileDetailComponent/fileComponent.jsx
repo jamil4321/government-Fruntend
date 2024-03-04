@@ -55,7 +55,7 @@ export default function FileDetailComponent() {
     fetch(`https://government-backend-production.up.railway.app/get-image/${params.id}`, {
       method: "GET",
     }).then((res) => {
-      if(!res.ok) throw new Error("")
+      if (!res.ok) throw new Error("")
       return res.json()
     }).then((data) => {
       console.log(data)
@@ -74,12 +74,6 @@ export default function FileDetailComponent() {
       navigate('/')
     })
   }
-  // let pdfRendered = false;
-  // let pdfRendered2 = false;
-  // let pdfRendered3 = false;
-  // let imgflag1 = false;
-  // let imgflag2 = false;
-  // let imgflag3 = false;
   if (loading) return <div className="max-w-5xl mx-auto p-4">
     <Spinner />
   </div>
@@ -99,7 +93,7 @@ export default function FileDetailComponent() {
           <h3 className="text-lg font-bold">From: {allImage[0]?.location}</h3>
           <h3 className="text-lg font-bold text-green">Category:{allImage[0]?.select}</h3>
         </div>}
-        {allImage &&  <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px', marginLeft: '20px' }}>
+        {allImage && <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px', marginLeft: '20px' }}>
 
           <img
             src={allImage[0]?.QrGet}
@@ -127,30 +121,30 @@ export default function FileDetailComponent() {
         <br />
 
       </div>}
+
       {
 
-        allImage && allImage.map((data, item) =>
-
-          data.image.includes("data:application/pdf") ? (
-            <div className="text-center mt-4" key={item}>
-              <h3 style={{ color: 'green' }}>First Pdf View</h3>
-              <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`} >
-                <Viewer fileUrl={data.image} />
-              </Worker>
+        allImage && allImage.map(data=>data.image.map((im, i) =>
+            im.includes("data:application/pdf") ? (
+              <div className="text-center mt-4" key={i}>
+                <h3 style={{ color: 'green' }}>First Pdf View</h3>
+                <Worker workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`} >
+                  <Viewer fileUrl={im} />
+                </Worker>
+                <br />
+                <a href={im} download={`${data.name}_pdf${i}.pdf`} style={{marginBottom:100}}>
+                  <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
+                </a>
+              </div>
+            ) : (<div className="mt-8" key={i}>
+              <img
+                src={im}
+                className="w-full max-w-3xl mx-auto border border-green-500"
+                alt=""
+                style={{ width: '85%', height: 'auto' ,marginTop:100}}
+              />
               <br />
-              <a href={data.image} download={`${data.name}_pdf1.pdf`}>
-                <button style={{ backgroundColor: 'green', color: 'white', padding: '6px', borderRadius: '10px' }}>Download Pdf </button>
-              </a>
-            </div>
-          ) : (<div className="mt-8">
-            <img
-              src={data.image}
-              className="w-full max-w-3xl mx-auto border border-green-500"
-              alt=""
-              style={{ width: '85%', height: 'auto' }}
-            />
-            <br />
-          </div>))
+            </div>)))
 
 
       }

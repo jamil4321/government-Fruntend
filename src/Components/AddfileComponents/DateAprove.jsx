@@ -1,14 +1,15 @@
 /* eslint-disable */
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import "../../App.css";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import QRCode from "qrcode";
 import { UserContext } from "../../context";
+import { useNavigate } from "react-router-dom";
 
-var alldatalength;
 
 export default function DateAprove() {
+  const navigator = useNavigate()
   const [image, setImage] = useState("");
   const [img, setImage2] = useState("");
   const [img3, setImage3] = useState("");
@@ -25,11 +26,12 @@ export default function DateAprove() {
   const [svgpresent2, Setsvgpresent2] = useState("");
   const [imgpresent3, setImagepreent3] = useState("");
   const [svgpresent3, Setsvgpresent3] = useState("");
-  const [getimages, Setgetallimages] = useState("");
+  // const [getimages, Setgetallimages] = useState("");
+  const [fileId, setFileid] = useState("000000")
   const [isButtonDisabled, setButtonDisabled] = useState(false); // const [fileidd, setFileid] = useState('');
   const [uploadbutton, setUploadbutton] = useState("open");
   const [graybutton, setGraybutton] = useState("");
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext)
 
   let uniqueId;
 
@@ -39,18 +41,18 @@ export default function DateAprove() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("data", data);
-        Setgetallimages(data.data);
-    
+        // console.log("data", data);
+        // Setgetallimages(data.data);
+        setFileid(`${String(data.data + 1).padStart(6, '0')}`)
+
       });
   }
   useEffect(() => {
     getImageData();
-  },[]);
-  alldatalength = getimages;
-  let concatid = alldatalength + 1;
-  let num = "00";
-  let incrementalldetaildata = num.concat(concatid);
+  }, []);
+  // alldatalength = getimages;
+  // let concatid = alldatalength + 1;
+  // let incrementalldetaildata = num.concat(concatid);
   // setFileid(incrementalldetaildata)
 
   useEffect(() => {
@@ -108,13 +110,13 @@ export default function DateAprove() {
       Setsvgpresent("show");
       setImagepreent("");
     }
-  });
+  }, [img, img3, image]);
 
   const covertToBase64 = (e) => {
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       setImage(reader.result);
     };
     reader.onerror = (error) => {
@@ -126,7 +128,7 @@ export default function DateAprove() {
     var reader1 = new FileReader();
     reader1.readAsDataURL(ev.target.files[0]);
     reader1.onload = () => {
-      console.log(reader1.result);
+      // console.log(reader1.result);
       setImage2(reader1.result);
       // localStorage.setItem("secondimage", reader1.result);
     };
@@ -139,7 +141,7 @@ export default function DateAprove() {
     var reader = new FileReader();
     reader.readAsDataURL(eve.target.files[0]);
     reader.onload = () => {
-      console.log(reader.result);
+      // console.log(reader.result);
       setImage3(reader.result);
       // localStorage.setItem("thirdimage", reader.result);
     };
@@ -170,33 +172,23 @@ export default function DateAprove() {
   async function uploadImage(e) {
     e.preventDefault();
     setButtonDisabled(true);
-
+    let QrCode = ""
     try {
       uniqueId = Math.round(Math.random() * 10000000000000);
-      console.log(uniqueId, "uniqueid");
-
       const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
-
       const response = await QRCode.toDataURL(QrNavigate);
-      console.log("Qrcode", response);
+      // console.log("Qrcode", response);
       setQrCode(response);
-      localStorage.setItem("QrCode", response);
+      // localStorage.setItem("QrCode", response);
+      QrCode = response
       setButtonDisabled(true);
     } catch (error) {
       console.log(error);
-      setButtonDisabled(true);
+      setButtonDisabled(false);
     }
-
-    var location = "";
-    localStorage.setItem("image", JSON.stringify(image));
-    localStorage.setItem("ii", img);
-    localStorage.setItem("iii", img3);
-
-    const QrGet = localStorage.getItem("QrCode");
-    const ii = localStorage.getItem("ii");
-    const iii = localStorage.getItem("iii");
+    // console.log(QrCode,"ActualQrcode")
     if (name.length > 0 && password.length > 0 && select.length > 0) {
-      if (image.length > 0 || ii.length > 0 || iii.length > 0) {
+      if (image.length > 0 || img.length > 0 || img3.length > 0) {
         try {
           const response = await fetch(
             "https://government-backend-production.up.railway.app/upload-image",
@@ -210,42 +202,44 @@ export default function DateAprove() {
                 "Access-Control-Allow-Origin": "*",
               },
               body: JSON.stringify({
-                base64: image,
+                base64: [image, img, img3],
                 name,
                 select,
                 password,
-                fileid: incrementalldetaildata,
+                fileid: fileId,
                 date,
-                location:user.location,
-                QrGet,
+                location: user.location,
+                QrGet: QrCode,
                 uniqueId,
-                ii,
-                iii,
+                userId: user._id
+                // ii,
+                // iii,
               }),
             }
           );
 
-          localStorage.setItem("name", JSON.stringify(name));
-          localStorage.setItem(
-            "fileid",
-            JSON.stringify(incrementalldetaildata)
-          );
-          localStorage.setItem("select", JSON.stringify(select));
-          localStorage.setItem("image", JSON.stringify(image));
-          localStorage.setItem("date", JSON.stringify(date));
-          localStorage.setItem("location", JSON.stringify(location));
-          localStorage.setItem("Qrcode", JSON.stringify(QrGet));
-          localStorage.setItem("image2", JSON.stringify(ii));
-          localStorage.setItem("image3", JSON.stringify(iii));
+          // localStorage.setItem("name", JSON.stringify(name));
+          // localStorage.setItem(
+          //   "fileid",
+          //   JSON.stringify(incrementalldetaildata)
+          // );
+          // localStorage.setItem("select", JSON.stringify(select));
+          // localStorage.setItem("image", JSON.stringify(image));
+          // localStorage.setItem("date", JSON.stringify(date));
+          // localStorage.setItem("location", JSON.stringify(location));
+          // localStorage.setItem("Qrcode", JSON.stringify(QrGet));
+          // localStorage.setItem("image2", JSON.stringify(ii));
+          // localStorage.setItem("image3", JSON.stringify(iii));
 
           // Check if the request was successful
           if (!response.ok) {
-            console.error("Failed to upload image");
+            console.error("Failed to upload image"); 
+            setButtonDisabled(false);
             return "... uploading";
           } else {
             Swal.fire({
               title: "File Added Successfully",
-              html: `<a href="/Dashboard"><div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><img src=${QrGet} alt="no image" style="max-width: 100%; height: auto;" /></div></a>`,
+              html: `<a href="/Dashboard"><div style="padding-left: 10%; padding-right: 10%; display: flex; justify-content: center; align-items: center;"><img src=${QrCode} alt="no image" style="max-width: 100%; height: auto;" /></div></a>`,
               showCancelButton: true,
               confirmButtonColor: "green",
               confirmButtonText: "Download",
@@ -258,14 +252,14 @@ export default function DateAprove() {
               if (result.isConfirmed) {
                 // Trigger download
                 const link = document.createElement("a");
-                link.href = QrGet;
+                link.href = QrCode;
                 link.download = `${name}_QrCode.png`;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
                 // Navigate to "/Dashboard" route
-                window.location.href = "/Dashboard";
+                navigator("/Dashboard")
               }
             });
 
@@ -275,7 +269,7 @@ export default function DateAprove() {
               document.querySelector(".swal2-container");
             sweetAlertContainer.addEventListener("click", () => {
               // Navigate to "/Dashboard" route
-              window.location.href = "/Dashboard";
+              navigator("/Dashboard");
             });
 
             setButtonDisabled(true);
@@ -285,7 +279,7 @@ export default function DateAprove() {
             setGraybutton("open");
 
             setTimeout(() => {
-              window.location = "/Dashboard";
+              navigator( "/Dashboard")
               setTimeout(() => {
                 setUploadbutton("open");
                 setGraybutton("");
@@ -328,7 +322,7 @@ export default function DateAprove() {
   };
 
   const newDate = formatDate2()
-  
+
   return (
     <form
       action="https://government-backend-production.up.railway.app/upload-image"
@@ -342,7 +336,7 @@ export default function DateAprove() {
         >
           <div className="mb-4 lg:mr-4">
             <h3 className="text-lg font-bold" style={{ fontSize: "18px" }}>
-              FileId:{incrementalldetaildata}
+              FileId:{fileId}
             </h3>
             <h3 className="text-lg font-bold" style={{ fontSize: "18px" }}>
               Date:{newDate}

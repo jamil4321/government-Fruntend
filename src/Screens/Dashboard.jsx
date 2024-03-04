@@ -4,7 +4,8 @@ import { Webnavbar } from '../Components/Dashboardcomponents/Navbar';
 import { Websidebar } from '../Components/Dashboardcomponents/sidebar';
 import { Webcard2 } from '../Components/Dashboardcomponents/card2';
 import TableWeb from '../Components/Dashboardcomponents/table';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from '../context';
 
 
 function Dashboard() {
@@ -12,50 +13,49 @@ function Dashboard() {
   const [search, setSearch] = useState('');
   const [FileAddToday, setFileAddToday] = useState('0');
   const [filesAddedThisMonth, setfilesAddedThisMonth] = useState('0')
+  const [totalFiles, setTotalFiles] = useState('0')
+  const {user} = useContext(UserContext)
 
   useEffect(() => {
-    getImage()
-  }, [])
+    if(user) getImage(user._id,user.type)
+  }, [user])
 
-  function getImage() {
-    fetch("https://government-backend-production.up.railway.app/get-image", {
+  useEffect(()=>{
+    if(allImage){
+      let filesAddedToday = 0;
+      let filesAddedThisMonth = 0;
+      const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' });
+      allImage.map((img)=>{
+        const itemDate = img.date;
+        const thismonth = img.date.slice(0, 3);
+        if (currentMonth === thismonth) {
+          filesAddedThisMonth++;
+          
+        }
+        if (itemDate.includes(currentDate)) {
+          filesAddedToday++;
+         
+        }
+      })
+        setfilesAddedThisMonth(filesAddedThisMonth)
+        setFileAddToday(filesAddedToday)
+      console.log(filesAddedToday,"filesAddedToday",filesAddedThisMonth,"filesAddedThisMonth")
+    }
+  },[allImage])
+  function getImage(id,type) {
+    fetch(type === "admin"?"https://government-backend-production.up.railway.app/get-image":`https://government-backend-production.up.railway.app/get-image-by-User/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
         setAllImage(data.data)
-        const currentDate = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-        const currentMonth = new Date().toLocaleDateString('en-US', { month: 'short' });
-        console.log(currentMonth , 'currentMonth')
-        let filesAddedToday = 0;
-        let filesAddedThisMonth = 0;
-
-        for (let i = 0; i < data.data.length; i++) {
-          const itemDate = data.data[i].date;
-          const thismonth = data.data[i].date.slice(0, 3);
-          console.log(thismonth , 'thismonth');
-          console.log(itemDate, "itemdate");
-          if (currentMonth === thismonth) {
-            filesAddedThisMonth++;
-            setfilesAddedThisMonth(filesAddedThisMonth)
-          }
-
-          console.log(currentDate, "currentdate");
-          console.log(itemDate, "itemDate");
-          if (itemDate.includes(currentDate)) {
-            filesAddedToday++;
-            setFileAddToday(filesAddedToday)
-          }
-        }
-        console.log("Files added today:", filesAddedToday);
       })
       .catch((error) => {
         console.error("Error fetching image:", error);
       });
   }
-  const TotalFiles = allImage.length
-
-
+console.log("FileAddToday",FileAddToday,"filesAddedThisMonth",filesAddedThisMonth,totalFiles,"TotalFiles")
   return (
     <div>
       <Webnavbar />
@@ -64,13 +64,13 @@ function Dashboard() {
           <Websidebar Sout="/" Afile="/AddFile" />
         </div>
         <div className='cardresponsiveback  flex justify-start ' style={{ paddingTop: '110px', width: '75%', flexDirection: 'column', paddingRight: '40px' }} >
-          <div className='cardresponsiveback' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', zIndex: -1, columnGap: '40px' }}>
+         {allImage && <div className='cardresponsiveback' style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', zIndex: -1, columnGap: '40px' }}>
             <Webcard2 price={FileAddToday} para="Files Added Today" heading1="Signed Today" />
             <Webcard2 price={filesAddedThisMonth} para="Files Added This Month" heading1="Signed This Month" />
-            <Webcard2 price={TotalFiles} para="All Files" heading1="Total Files" color="#292929" text="white" reload="Reload" />
-          </div>
+            <Webcard2 price={allImage ? allImage.length :0} para="All Files" heading1="Total Files" color="#292929" text="white" reload="Reload" />
+          </div>}
           <div className='pt-8 flex justify-center tableResponsive ' >
-            <TableWeb />
+            <TableWeb allImage={allImage} />
           </div>
         </div>
       </div>
