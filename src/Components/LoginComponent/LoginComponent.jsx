@@ -45,7 +45,11 @@ export default function LoginComponent() {
                     icon: "success",
                     showConfirmButton: false,
                     timer: 2000, // Set the timer to 2 seconds
+                    onClose: () => {
+                        setButtonDisabled(false);
+                    }
                 });
+
                 setButtonDisabled(false)
                 // navigate("/dashboard")
             })

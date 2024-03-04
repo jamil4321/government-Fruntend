@@ -60,7 +60,7 @@ export default function QrDetailComponent() {
       <div className="login" style={{ maxWidth: '400px', width: '80%' }}>
         <div className="child1">
           <h1 style={{ fontSize: '25px', fontWeight: 'bold' }}>Hello Again!</h1>
-          <h4>Find File</h4>
+          <h4>Enter File Password</h4>
         </div>
         <div className="child1" style={{}}>
           <form onSubmit={handleLogin}>
