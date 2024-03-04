@@ -34,6 +34,8 @@ export default function QrDetailComponent() {
             customClass: {
               popup: "left-popup",
             },
+            timer:2000,
+            onClose: () =>null
           });
           navigate(`/FileView/qr/${data.data[0].fileid}`)
         } else {

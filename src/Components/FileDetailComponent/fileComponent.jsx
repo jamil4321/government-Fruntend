@@ -67,9 +67,7 @@ export default function FileDetailComponent() {
         icon: "error",
         showConfirmButton: false,
         timer: 2000, // Set the timer to 2 seconds
-        // onClose: () => {
-        //     setButtonDisabled(false);
-        // }
+        onClose: () =>  setLoading(false)
       });
       navigate('/')
     })
