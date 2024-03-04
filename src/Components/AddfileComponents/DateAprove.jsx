@@ -175,7 +175,7 @@ export default function DateAprove() {
     let QrCode = ""
     try {
       uniqueId = Math.round(Math.random() * 10000000000000);
-      const QrNavigate = `https://${window.location.host}/Qrdetail/id/id:${uniqueId}`;
+      const QrNavigate = `https://${window.location.host}/Qrdetail/id/${uniqueId}`;
       const response = await QRCode.toDataURL(QrNavigate);
       // console.log("Qrcode", response);
       setQrCode(response);
