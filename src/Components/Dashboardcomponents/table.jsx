@@ -209,54 +209,14 @@ export default function TableWeb({allImage}) {
                       </td>
                       <td className={classes}>
                         <Tooltip content="Open File">
-                          <IconButton variant="text">
                             <Button
-                              style={{ marginLeft: "20px" }}
-                              onClick={() => {
-                                // localStorage.setItem(
-                                //   "name",
-                                //   JSON.stringify(data.name)
-                                // );
-                                // localStorage.setItem(
-                                //   "fileid",
-                                //   JSON.stringify(data.fileid)
-                                // );
-                                // localStorage.setItem(
-                                //   "select",
-                                //   JSON.stringify(data.select)
-                                // );
-                                // localStorage.setItem(
-                                //   "image",
-                                //   JSON.stringify(data.image)
-                                // );
-                                // localStorage.setItem(
-                                //   "date",
-                                //   JSON.stringify(data.date)
-                                // );
-                                // localStorage.setItem(
-                                //   "location",
-                                //   JSON.stringify(data.location)
-                                // );
-                                // localStorage.setItem(
-                                //   "Qrcode",
-                                //   JSON.stringify(data.QrGet)
-                                // );
-                                // localStorage.setItem(
-                                //   "image2",
-                                //   JSON.stringify(data.image2)
-                                // );
-                                // localStorage.setItem(
-                                //   "image3",
-                                //   JSON.stringify(data.image3)
-                                // );
-                                navigate( `/FileView/${data.fileid}`);
-                              }}
-                              className="flex items-center gap-3"
+                              // style={{ marginLeft: "20px" }}
+                              onClick={() => navigate( `/FileView/${data.fileid}`)}
+                              // className="flex items-center gap-3"
                               size="sm"
                             >
                               view
                             </Button>
-                          </IconButton>
                         </Tooltip>
                       </td>
                     </tr>
