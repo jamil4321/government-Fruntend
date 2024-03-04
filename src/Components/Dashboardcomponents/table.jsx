@@ -107,7 +107,7 @@ export default function TableWeb({allImage}) {
           </div>
         </div>
       </CardHeader>
-      <CardBody className="overflow-scroll px-0">
+      <CardBody className=" p-3 ">
         <div
           className="table-container"
           style={{ maxHeight: "580px", overflowY: "auto" }}
