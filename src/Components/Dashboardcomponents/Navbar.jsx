@@ -1,13 +1,14 @@
 /* eslint-disable */
-import React from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import React, { useContext } from "react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, user } from "@nextui-org/react";
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Avatar, User } from "@nextui-org/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import '../../App.css'
-
+import {UserContext} from '../../context'
 
 export function Webnavbar(props) {
+  const {user} = useContext(UserContext)
   const NavigateFunc = () => {
     window.location = "/Dashboard"
   }
@@ -27,10 +28,11 @@ export function Webnavbar(props) {
           </NavbarBrand >
         </div>
         <div id="navbaricon">
-          {/* <NavbarBrand className="m-0" style={{ height: '90px', columnGap: '10px', marginRight: '20px' }}>
-            <FontAwesomeIcon icon={faBell} size="lg" style={{ border: '2px solid gray', padding: '5px', borderRadius: '10px' }} />
-            <FontAwesomeIcon icon={faEnvelope} size="lg" style={{ border: '2px solid gray', padding: '5px', borderRadius: '10px' }} />
-          </NavbarBrand> */}
+          <NavbarBrand className="m-0" style={{ height: '90px', columnGap: '10px', marginRight: '20px' }}>
+            {/* <FontAwesomeIcon icon={faBell} size="lg" style={{ border: '2px solid gray', padding: '5px', borderRadius: '10px' }} />
+            <FontAwesomeIcon icon={faEnvelope} size="lg" style={{ border: '2px solid gray', padding: '5px', borderRadius: '10px' }} /> */}
+            {user&&<h2>Hi {user ? user.name:""}</h2>}
+          </NavbarBrand>
         </div>
       </Navbar>
     </div>

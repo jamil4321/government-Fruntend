@@ -17,7 +17,7 @@ export default function QrDetailComponent() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    fetch(`https://government-backend-production.up.railway.app/get-image/find_by_qr/${id}`, {
+    fetch(`http://192.168.100.2:5000/get-image/find_by_qr/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())

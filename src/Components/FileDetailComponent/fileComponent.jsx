@@ -52,7 +52,7 @@ export default function FileDetailComponent() {
   function getImage() {
     // console.log("localStorageFileid", localStorageFileid, params)
     setLoading(true)
-    fetch(`https://government-backend-production.up.railway.app/get-image/${params.id}`, {
+    fetch(`http://192.168.100.2:5000/get-image/${params.id}`, {
       method: "GET",
     }).then((res) => {
       if (!res.ok) throw new Error("")
@@ -88,7 +88,7 @@ export default function FileDetailComponent() {
         {allImage && <div className="mb-4 sm:mr-4">
           <h3 className="text-lg font-bold">File Id: {allImage[0]?.fileid}</h3>
           <h3 className="text-lg font-bold">Date: {allImage[0]?.date}</h3>
-          <h3 className="text-lg font-bold">From: {allImage[0]?.userId.name}</h3>
+          <h3 className="text-lg font-bold">From: {String(allImage[0]?.userId.name).toLocaleUpperCase()}</h3>
           <h3 className="text-lg font-bold text-green">Category:{allImage[0]?.select}</h3>
         </div>}
         {allImage && <div style={{ display: 'flex', flexDirection: 'column', marginBottom: '15px', marginLeft: '20px' }}>

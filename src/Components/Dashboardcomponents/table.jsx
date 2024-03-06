@@ -46,7 +46,7 @@ export default function TableWeb({allImage}) {
   // async function getImage() {
   //   try {
   //     const response = await axios.get(
-  //       "https://government-backend-production.up.railway.app/get-image"
+  //       "http://192.168.100.2:5000/get-image"
   //     );
 
   //     // Check if the response is successful (status code 200)

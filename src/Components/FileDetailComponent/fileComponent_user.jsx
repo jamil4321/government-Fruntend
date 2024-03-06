@@ -52,7 +52,7 @@ export default function FileDetailComponent() {
   function getImage() {
     // console.log("localStorageFileid", localStorageFileid, params)
     setLoading(true)
-    fetch(`https://government-backend-production.up.railway.app/get-image/${params.id}`, {
+    fetch(`http://192.168.100.2:5000/get-image/${params.id}`, {
       method: "GET",
     }).then((res) => {
       if (!res.ok) throw new Error("")

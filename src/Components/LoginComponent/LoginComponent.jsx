@@ -18,7 +18,7 @@ export default function LoginComponent() {
     const handleLogin = (e) => {
         e.preventDefault();
         setButtonDisabled(true)
-        fetch("https://government-backend-production.up.railway.app/login-user", {
+        fetch("http://192.168.100.2:5000/login-user", {
             method: "POST",
             crossDomain: true,
             headers: {

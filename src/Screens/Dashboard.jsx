@@ -44,7 +44,7 @@ function Dashboard() {
     }
   },[allImage])
   function getImage(id,type) {
-    fetch(type === "admin"?"https://government-backend-production.up.railway.app/get-image":`https://government-backend-production.up.railway.app/get-image-by-User/${id}`, {
+    fetch(type === "admin"?"http://192.168.100.2:5000/get-image":`http://192.168.100.2:5000/get-image-by-User/${id}`, {
       method: "GET",
     })
       .then((res) => res.json())
